@@ -6,6 +6,7 @@ import { Hero } from "./components/Hero";
 import { Stats } from "./components/Stats";
 import { WhySection } from "./components/WhySection";
 import { ProcessSection } from "./components/ProcessSection";
+import { MaterialsSection } from "./components/MaterialsSection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -931,22 +932,12 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900">
-        <div className="max-w-6xl mx-auto text-center">
-          <SectionTitle
-            kicker={t("materialsKicker")}
-            title={t("materialsTitle")}
-            subtitle={t("materialsSub")}
-          />
-          <div className="grid md:grid-cols-4 gap-6 mt-10" data-reveal>
-            {["SKYFOL", "STEK", "3M", "Avery Dennison"].map((b, i) => (
-              <Card key={i}>
-                <p className="text-xl tracking-[0.2em]">{b}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <MaterialsSection
+        kicker={t("materialsKicker")}
+        title={t("materialsTitle")}
+        subtitle={t("materialsSub")}
+        brands={["SKYFOL", "STEK", "3M", "Avery Dennison"]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
