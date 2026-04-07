@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
+import { Stats } from "./components/Stats";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -871,25 +872,13 @@ export default function Home() {
         limitedText={t("limited")}
       />
 
-      <section className="py-16 md:py-24 border-t border-neutral-900 text-center px-6">
-        <div
-          className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10"
-          data-reveal
-        >
-          <div>
-            <p className="text-3xl md:text-4xl mb-2">{t("stats1v")}</p>
-            <p className="text-gray-400 text-xs md:text-sm">{t("stats1l")}</p>
-          </div>
-          <div>
-            <p className="text-3xl md:text-4xl mb-2">{t("stats2v")}</p>
-            <p className="text-gray-400 text-xs md:text-sm">{t("stats2l")}</p>
-          </div>
-          <div>
-            <p className="text-3xl md:text-4xl mb-2">{t("stats3v")}</p>
-            <p className="text-gray-400 text-xs md:text-sm">{t("stats3l")}</p>
-          </div>
-        </div>
-      </section>
+      <Stats
+        stats={[
+          { value: t("stats1v"), label: t("stats1l") },
+          { value: t("stats2v"), label: t("stats2l") },
+          { value: t("stats3v"), label: t("stats3l") },
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
         <div className="max-w-6xl mx-auto">
