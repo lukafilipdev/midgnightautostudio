@@ -249,3 +249,35 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(255, 255, 255, 0.08);
   }
 }
+
+/* Why Section */
+.why-section {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.03), transparent 60%),
+    linear-gradient(to bottom, #000000, #020202);
+}
+
+.why-column {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.why-column:hover {
+  transform: translateY(-4px);
+}
+
+.why-column:hover .why-column-title {
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .why-column:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}

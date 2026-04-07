@@ -66,13 +66,13 @@ const I18N: Record<Lang, Dict> = {
     whyTitle: "ZAKAJ MIDNIGHT AUTO STUDIO",
     whySub:
       "Nismo klasičen wrap shop. Delujemo kot butik studio za vozila visoke vrednosti.",
-    why1t: "3D Vizualizacija",
+    why1t: "3D vizualizacija pred izvedbo",
     why1d:
       "Pred montažo vidiš končni izgled. Barva, finish in detajli so potrjeni še preden se dotaknemo vozila.",
-    why2t: "Butični pristop",
+    why2t: "Omejena kapaciteta, maksimalna natančnost",
     why2d:
       "Sprejmemo omejeno število vozil mesečno. Vsak projekt dobi čas, natančnost in kontrolirano studijsko okolje.",
-    why3t: "Fokus na performance vozila",
+    why3t: "Specializacija za performance vozila",
     why3d:
       "BMW M, Audi RS in Porsche. Razumemo detajle, linije karoserije in pričakovanja lastnikov teh vozil.",
     processKicker: "PROCESS",
@@ -237,13 +237,13 @@ const I18N: Record<Lang, Dict> = {
     whyTitle: "WHY MIDNIGHT AUTO STUDIO",
     whySub:
       "Not a typical wrap shop. A boutique studio built for high-value vehicles.",
-    why1t: "3D Design Preview",
+    why1t: "3D visualization before execution",
     why1d:
       "See the final design before installation. Finish, colour and details approved before any film is applied.",
-    why2t: "Boutique Approach",
+    why2t: "Limited capacity, maximum precision",
     why2d:
       "Limited vehicles per month. Every build receives full attention and controlled studio conditions.",
-    why3t: "Performance Vehicle Focus",
+    why3t: "Performance vehicle specialization",
     why3d:
       "BMW M, Audi RS and Porsche builds. We understand the design language and expectations of these cars.",
     processKicker: "PROCESS",
@@ -409,13 +409,13 @@ const I18N: Record<Lang, Dict> = {
     whyTitle: "WARUM MIDNIGHT AUTO STUDIO",
     whySub:
       "Kein klassischer Wrap-Shop. Ein Boutique-Studio für Fahrzeuge mit hohem Wert.",
-    why1t: "3D Visualisierung",
+    why1t: "3D-Visualisierung vor der Ausführung",
     why1d:
       "Das finale Design wird vor der Montage visualisiert – Finish und Details werden vorher bestätigt.",
-    why2t: "Boutique Ansatz",
+    why2t: "Begrenzte Kapazität, maximale Präzision",
     why2d:
       "Begrenzte Anzahl Fahrzeuge pro Monat – jedes Projekt erhält volle Aufmerksamkeit.",
-    why3t: "Fokus auf Performance Fahrzeuge",
+    why3t: "Spezialisierung auf Performance-Fahrzeuge",
     why3d:
       "BMW M, Audi RS und Porsche – wir kennen die Linien, Details und Erwartungen dieser Fahrzeuge.",
     processKicker: "PROCESS",
