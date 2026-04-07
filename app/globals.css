@@ -281,3 +281,142 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(255, 255, 255, 0.08);
   }
 }
+
+/* Process Section */
+.process-section {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.025), transparent 60%),
+    linear-gradient(to bottom, #000000, #020202);
+}
+
+.process-glow {
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03), transparent 70%);
+  filter: blur(80px);
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.process-row {
+  position: relative;
+}
+
+.process-flow-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.03) 20%,
+    rgba(255, 255, 255, 0.03) 80%,
+    transparent
+  );
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.process-step {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.process-step:hover {
+  transform: translateY(-3px);
+}
+
+.process-step:hover .process-step-title {
+  color: #ffffff;
+}
+
+.process-step-title {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.25s ease;
+}
+
+.process-step-number {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: white;
+  opacity: 0.35;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.25s ease;
+}
+
+.process-step-number::after {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.process-step:hover .process-step-number {
+  opacity: 0.6;
+}
+
+/* First step emphasis */
+.process-row:first-child .process-step:first-child {
+  transform: translateY(-4px);
+}
+
+.process-row:first-child .process-step:first-child .process-step-title {
+  color: #ffffff;
+}
+
+.process-row:first-child .process-step:first-child .process-step-number {
+  opacity: 0.55;
+}
+
+.process-row:first-child .process-step:first-child:hover {
+  transform: translateY(-7px);
+}
+
+/* Last steps subtle de-emphasis */
+.process-row:last-child .process-step:nth-child(2),
+.process-row:last-child .process-step:nth-child(3) {
+  opacity: 0.92;
+}
+
+/* Last step - completion feel */
+.process-row:last-child .process-step:last-child .process-step-title {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+@media (min-width: 768px) {
+  .process-step-number {
+    justify-content: flex-start;
+  }
+
+  .process-step:not(:nth-child(3n))::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.02)
+    );
+  }
+
+  /* Last step no connector */
+  .process-row:last-child .process-step:last-child::after {
+    display: none;
+  }
+}
