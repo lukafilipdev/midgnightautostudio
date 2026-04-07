@@ -844,24 +844,8 @@ export default function Home() {
         bullets={[t("cfgB1"), t("cfgB2"), t("cfgB3")]}
         cta1Text={t("cfgCta1")}
         cta2Text={t("cfgCta2")}
-        miniCfgLabel={t("miniCfg")}
-        interactiveLabel={t("interactive")}
-        finishLabel={t("finish")}
-        glossLabel={t("gloss")}
-        satinLabel={t("satin")}
-        matteLabel={t("matte")}
-        coverageLabel={t("coverage")}
-        coverageHint={t("coverageHint")}
-        ppfCoverageLabel={t("ppfCoverage")}
-        detailsLabel={t("details")}
-        accentsLabel={t("accents")}
-        approvalLabel={t("approval")}
-        beforeInstallLabel={t("beforeInstall")}
-        images={{
-          gloss: IMG.cfgGloss,
-          satin: IMG.cfgSatin,
-          matte: IMG.cfgMatte,
-        }}
+        videoLabel={lang === "sl" ? "Dejanski postopek predogleda" : lang === "de" ? "Echtes Vorschauprozess" : "Real preview process"}
+        videoId="XfKUhKLCZgE"
       />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">

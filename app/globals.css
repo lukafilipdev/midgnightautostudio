@@ -709,3 +709,27 @@ input[type="range"]::-moz-range-thumb {
     width: 40px;
   }
 }
+
+/* Configurator Video Section */
+.cfg-video-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  background: #000;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.cfg-video-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.cfg-video-label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 12px;
+}
