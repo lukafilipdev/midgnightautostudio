@@ -54,7 +54,7 @@ export function GallerySection({
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [autoSlideDisabled, setAutoSlideDisabled] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -94,7 +94,8 @@ export function GallerySection({
     setActive(index);
   }, []);
 
-  const scrollBy = useCallback((dir: -1 | 1) => {
+  const handleScrollBy = useCallback((dir: -1 | 1) => {
+    setAutoSlideDisabled(true);
     const newIndex = Math.max(0, Math.min(items.length - 1, active + dir));
     scrollToIndex(newIndex);
   }, [active, items.length, scrollToIndex]);
@@ -158,22 +159,25 @@ export function GallerySection({
     };
   }, [items.length]);
 
-  // Auto-slide
+  // Auto-slide (disabled once user interacts)
   useEffect(() => {
-    if (isPaused || !isVisible) return;
+    if (autoSlideDisabled || !isVisible) return;
     const interval = setInterval(() => {
       const nextIndex = (active + 1) % items.length;
       scrollToIndex(nextIndex);
     }, 5000);
     return () => clearInterval(interval);
-  }, [active, isPaused, isVisible, items.length, scrollToIndex]);
+  }, [active, autoSlideDisabled, isVisible, items.length, scrollToIndex]);
+
+  const handleManualNavigation = useCallback((index: number) => {
+    setAutoSlideDisabled(true);
+    scrollToIndex(index);
+  }, [scrollToIndex]);
 
   return (
     <section
       ref={sectionRef}
       className="gallery-section py-20 md:py-32 px-6 border-t border-white/[0.06]"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -207,7 +211,7 @@ export function GallerySection({
             <div className="hidden md:flex gap-3">
               <button
                 type="button"
-                onClick={() => scrollBy(-1)}
+                onClick={() => handleScrollBy(-1)}
                 aria-label={prevLabel}
                 className="gallery-nav-btn"
               >
@@ -215,7 +219,7 @@ export function GallerySection({
               </button>
               <button
                 type="button"
-                onClick={() => scrollBy(1)}
+                onClick={() => handleScrollBy(1)}
                 aria-label={nextLabel}
                 className="gallery-nav-btn"
               >
@@ -224,7 +228,7 @@ export function GallerySection({
             </div>
           </div>
 
-          <div className="gallery-wrapper relative">
+          <div className={`gallery-wrapper relative ${active === 0 ? "at-start" : ""} ${active === items.length - 1 ? "at-end" : ""}`}>
           <div
             ref={scrollerRef}
             className="gallery-track flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:mx-0 md:px-0"
@@ -232,7 +236,7 @@ export function GallerySection({
             {items.map((it, idx) => (
               <div
                 key={idx}
-                onClick={() => scrollToIndex(idx)}
+                onClick={() => handleManualNavigation(idx)}
                 className={`gallery-card snap-center shrink-0 w-[85%] md:w-[520px] cursor-pointer ${
                   idx === active ? "gallery-card-active" : ""
                 }`}
@@ -281,7 +285,7 @@ export function GallerySection({
                 key={i}
                 type="button"
                 aria-label={`${dotLabel} ${i + 1}`}
-                onClick={() => scrollToIndex(i)}
+                onClick={() => handleManualNavigation(i)}
                 className={`gallery-dot ${i === active ? "gallery-dot-active" : ""}`}
               />
             ))}
