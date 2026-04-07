@@ -769,25 +769,18 @@ export default function Home() {
   const [paintSlider, setPaintSlider] = useState(50);
   const [finish, setFinish] = useState<"gloss" | "satin" | "matte">("gloss");
   const [coverage, setCoverage] = useState(70);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const [showStickyCta, setShowStickyCta] = useState(true);
 
   useRevealOnScroll();
-
-  // Cursor light effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const hero = document.querySelector('.hero-bg');
-      if (hero) {
-        const rect = hero.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        hero.style.setProperty('--mouse-x', `${x}%`);
-        hero.style.setProperty('--mouse-y', `${y}%`);
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const t = useMemo(() => {
     const dict = I18N[lang];
@@ -865,8 +858,8 @@ export default function Home() {
 
   return (
     <main className="bg-black text-white min-h-screen overflow-x-hidden">
-      <nav className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-xl z-[70] border-b border-white/[0.08]">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-3">
+      <nav className={`fixed top-0 left-0 w-full z-[70] transition-all duration-300 ${scrolled ? "bg-black/90 backdrop-blur-xl" : "bg-transparent"}`}>
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
           {/* <Logo className="h-8 w-auto" /> */}
           <span className="text-white text-lg font-bold tracking-[0.25em]">MIDNIGHT</span>
           <div className="flex items-center gap-3">
