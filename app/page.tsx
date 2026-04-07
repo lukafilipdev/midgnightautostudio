@@ -7,6 +7,7 @@ import { Stats } from "./components/Stats";
 import { WhySection } from "./components/WhySection";
 import { ProcessSection } from "./components/ProcessSection";
 import { MaterialsSection } from "./components/MaterialsSection";
+import { StudioSection } from "./components/StudioSection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -936,40 +937,28 @@ export default function Home() {
         kicker={t("materialsKicker")}
         title={t("materialsTitle")}
         subtitle={t("materialsSub")}
-        brands={["SKYFOL", "STEK", "3M", "Avery Dennison"]}
+        partnersLabel={lang === "sl" ? "Izbrani materialni partnerji" : lang === "de" ? "Ausgewählte Materialpartner" : "Selected material partners"}
+        brands={[
+          { name: "SKYFOL", descriptor: lang === "sl" ? "Zaščitne folije" : lang === "de" ? "Schutzfolien" : "Protection films" },
+          { name: "STEK", descriptor: lang === "sl" ? "PPF sistemi" : lang === "de" ? "PPF-Systeme" : "PPF systems" },
+          { name: "3M", descriptor: lang === "sl" ? "Preverjeni materiali" : lang === "de" ? "Bewährte Materialien" : "Trusted materials" },
+          { name: "Avery Dennison", descriptor: lang === "sl" ? "Wrap sistemi" : lang === "de" ? "Wrap-Systeme" : "Wrap systems" },
+        ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div data-reveal>
-            <p className="text-xs tracking-[0.35em] text-gray-500 mb-4">
-              {t("studioKicker")}
-            </p>
-            <h2 className="text-2xl md:text-3xl tracking-[0.3em] mb-6">
-              {t("studioTitle")}
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              {t("studioText")}
-            </p>
-            <div className="space-y-3 text-sm text-gray-300">
-              <p>• LED studio lighting</p>
-              <p>• Dust controlled workspace</p>
-              <p>• Temperature regulated installation</p>
-              <p>• Precision cutting & edge wrapping</p>
-            </div>
-          </div>
-          <div
-            className="rounded-3xl overflow-hidden border border-neutral-800"
-            data-reveal
-          >
-            <img
-              src={IMG.studio}
-              className="w-full h-[420px] object-cover"
-              alt="Studio"
-            />
-          </div>
-        </div>
-      </section>
+      <StudioSection
+        kicker={t("studioKicker")}
+        title={t("studioTitle")}
+        description={t("studioText")}
+        features={
+          lang === "sl"
+            ? ["LED studijska osvetlitev", "Prahovni kontroliran prostor", "Temperaturno regulirana montaža", "Precizno rezanje in robljenje"]
+            : lang === "de"
+              ? ["LED-Studiobeleuchtung", "Staubkontrollierter Arbeitsbereich", "Temperaturgeregelte Installation", "Präzisionsschnitt und Kantenumwicklung"]
+              : ["LED studio lighting", "Dust controlled workspace", "Temperature regulated installation", "Precision cutting & edge wrapping"]
+        }
+        imageSrc={IMG.studio}
+      />
 
       <section id="projects" className="py-20 md:py-32 px-6 border-t border-neutral-900">
         <SectionTitle

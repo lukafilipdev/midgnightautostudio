@@ -420,3 +420,31 @@ input[type="range"]::-moz-range-thumb {
     display: none;
   }
 }
+
+/* Materials Section */
+.materials-section {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.02), transparent 60%),
+    linear-gradient(to bottom, #000000, #020202);
+}
+
+.material-card-inner {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 18px 18px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.material-card:hover .material-card-inner {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+@media (min-width: 768px) {
+  .material-card-inner {
+    padding: 22px 22px;
+  }
+}
