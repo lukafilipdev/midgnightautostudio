@@ -9,6 +9,7 @@ import { ProcessSection } from "./components/ProcessSection";
 import { MaterialsSection } from "./components/MaterialsSection";
 import { StudioSection } from "./components/StudioSection";
 import { FeaturedBuildsSection } from "./components/FeaturedBuildsSection";
+import { GallerySection } from "./components/GallerySection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -618,146 +619,6 @@ function SectionTitle({
   );
 }
 
-function AppleGallery({
-  items,
-  t,
-}: {
-  items: { src: string; label: string }[];
-  t: (k: string) => string;
-}) {
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = useState(0);
-
-  const scrollBy = (dir: -1 | 1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const amount = Math.min(el.clientWidth * 0.9, 900);
-    el.scrollBy({ left: dir * amount, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const children = Array.from(el.children) as HTMLElement[];
-      if (!children.length) return;
-      const mid = el.scrollLeft + el.clientWidth / 2;
-      let bestIdx = 0;
-      let bestDist = Infinity;
-      children.forEach((c, idx) => {
-        const cMid = c.offsetLeft + c.clientWidth / 2;
-        const d = Math.abs(cMid - mid);
-        if (d < bestDist) {
-          bestDist = d;
-          bestIdx = idx;
-        }
-      });
-      setActive(bestIdx);
-    };
-    onScroll();
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [items.length]);
-
-  const Chevron = ({ dir }: { dir: "left" | "right" }) => (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="opacity-90"
-    >
-      <path
-        d={dir === "left" ? "M15 18l-6-6 6-6" : "M9 6l6 6-6 6"}
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-
-  return (
-    <div data-reveal>
-      <div className="flex items-center justify-between mb-6">
-        <p className="text-xs tracking-[0.35em] text-gray-500">
-          {t("galleryLabel")}
-        </p>
-        <div className="hidden md:flex gap-2">
-          <button
-            type="button"
-            onClick={() => scrollBy(-1)}
-            aria-label={t("prev")}
-            className="border border-neutral-800 w-10 h-10 rounded-full text-gray-200 hover:border-white transition flex items-center justify-center"
-          >
-            <Chevron dir="left" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollBy(1)}
-            aria-label={t("next")}
-            className="border border-neutral-800 w-10 h-10 rounded-full text-gray-200 hover:border-white transition flex items-center justify-center"
-          >
-            <Chevron dir="right" />
-          </button>
-        </div>
-      </div>
-      <div
-        ref={scrollerRef}
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:mx-0 md:px-0"
-        style={{ scrollBehavior: "smooth" }}
-      >
-        {items.map((it, idx) => (
-          <div key={idx} className="snap-center shrink-0 w-[88%] md:w-[520px]">
-            <div className="rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-950">
-              <div className="relative">
-                <img
-                  src={it.src}
-                  alt={it.label}
-                  className="w-full h-[340px] md:h-[420px] object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-black/0" />
-                <div className="absolute bottom-5 left-6 right-6">
-                  <p className="text-sm md:text-base tracking-wide">
-                    {it.label}
-                  </p>
-                  <p className="text-xs text-gray-300 mt-1">
-                    Boutique finish · Precision edges · Studio lighting
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div
-        className="flex items-center justify-center gap-2 mt-4"
-        aria-label="Gallery progress"
-      >
-        {items.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            aria-label={`${t("dot")} ${i + 1}`}
-            onClick={() => {
-              const el = scrollerRef.current;
-              if (!el) return;
-              const child = el.children[i] as HTMLElement | undefined;
-              if (!child) return;
-              el.scrollTo({ left: child.offsetLeft - 24, behavior: "smooth" });
-            }}
-            className={
-              "h-2 rounded-full transition-all border border-neutral-700 " +
-              (i === active ? "w-8 bg-white" : "w-2 bg-transparent")
-            }
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
@@ -830,9 +691,9 @@ export default function Home() {
 
   const projects = useMemo(
     () => [
-      { src: IMG.m4, label: "BMW M4 · Full Body PPF" },
-      { src: IMG.p911, label: "Porsche 911 · Satin Wrap" },
-      { src: IMG.rs6, label: "Audi RS6 · Track Protection" },
+      { src: IMG.m4, label: "BMW M4 · Full Body PPF", tag: "PPF" },
+      { src: IMG.p911, label: "Porsche 911 · Satin Wrap", tag: "WRAP" },
+      { src: IMG.rs6, label: "Audi RS6 · Track Protection", tag: "TRACK" },
     ],
     []
   );
@@ -967,18 +828,21 @@ export default function Home() {
         subtitle={t("featuredSub")}
         projects={projects}
         installationText={lang === "sl" ? "3D predogled · Studijska montaža" : lang === "de" ? "3D-Vorschau · Studio-Installation" : "Design preview · Studio installation"}
+        viewProjectText={lang === "sl" ? "Poglej projekt" : lang === "de" ? "Projekt ansehen" : "View project"}
+        viewAllText={lang === "sl" ? "Poglej vse projekte" : lang === "de" ? "Alle Projekte ansehen" : "View all projects"}
       />
 
-      <section className="py-20 md:py-32 px-6 border-t border-neutral-900">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle
-            kicker={t("galleryKicker")}
-            title={t("galleryTitle")}
-            subtitle={t("gallerySub")}
-          />
-          <AppleGallery items={gallery} t={t} />
-        </div>
-      </section>
+      <GallerySection
+        kicker={t("galleryKicker")}
+        title={t("galleryTitle")}
+        subtitle={t("gallerySub")}
+        items={gallery}
+        galleryLabel={t("galleryLabel")}
+        prevLabel={t("prev")}
+        nextLabel={t("next")}
+        dotLabel={t("dot")}
+        detailText={lang === "sl" ? "Butični finish · Precizni robovi · Studijska osvetlitev" : lang === "de" ? "Boutique-Finish · Präzise Kanten · Studiobeleuchtung" : "Boutique finish · Precision edges · Studio lighting"}
+      />
 
       <section className="py-20 md:py-32 px-6 border-t border-neutral-900 bg-black">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">

@@ -498,3 +498,69 @@ input[type="range"]::-moz-range-thumb {
 .studio-image-wrapper:hover {
   transform: scale(1.01);
 }
+
+/* Featured Builds Section */
+.featured-section {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.03), transparent 60%),
+    #000000;
+}
+
+.project-card {
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+}
+
+@media (min-width: 768px) {
+  .project-card-featured {
+    transform: scale(1.02);
+  }
+
+  .project-card-featured:hover {
+    transform: scale(1.04) translateY(-6px);
+  }
+}
+
+.project-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.project-card:hover .project-image-wrapper {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.project-image {
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.04);
+  filter: brightness(1.08) contrast(1.05);
+}
+
+.project-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-tag {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
