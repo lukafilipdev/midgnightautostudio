@@ -11,6 +11,7 @@ import { StudioSection } from "./components/StudioSection";
 import { FeaturedBuildsSection } from "./components/FeaturedBuildsSection";
 import { GallerySection } from "./components/GallerySection";
 import { ConfiguratorSection } from "./components/ConfiguratorSection";
+import { ProtectionDemo } from "./components/ProtectionDemo";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -633,7 +634,6 @@ export default function Home() {
   const [lang, setLang] = useState<Lang>("sl");
   const [service, setService] = useState("");
   const [tintSlider, setTintSlider] = useState(52);
-  const [paintSlider, setPaintSlider] = useState(50);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -848,76 +848,39 @@ export default function Home() {
         videoId="XfKUhKLCZgE"
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
-        <div className="max-w-6xl mx-auto text-center">
-          <SectionTitle
-            kicker={t("demoKicker")}
-            title={t("demoTitle")}
-            subtitle={t("demoSub")}
-          />
-          <div className="max-w-5xl mx-auto" data-reveal>
-            <div className="relative rounded-3xl overflow-hidden border border-neutral-800 bg-black">
-              <img src={IMG.tintBefore} className="w-full" alt="Damaged paint" />
-              <div
-                className="absolute top-0 left-0 h-full overflow-hidden"
-                style={{ width: `${paintSlider}%` }}
-              >
-                <img
-                  src={IMG.tintAfter}
-                  className="w-full"
-                  alt="Protected paint"
-                />
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={paintSlider}
-                onChange={(e) => setPaintSlider(Number(e.target.value))}
-                className="absolute bottom-5 left-1/2 -translate-x-1/2 w-3/4"
-              />
-            </div>
-            <div className="grid md:grid-cols-3 gap-6 mt-10">
-              <Card>
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
-                  IMPACT
-                </p>
-                <p className="text-gray-300 text-sm">
-                  {lang === "sl"
-                    ? "PPF absorbira udarce kamenčkov."
-                    : lang === "de"
-                      ? "PPF absorbiert Steinschläge."
-                      : "PPF absorbs stone impacts."}
-                </p>
-              </Card>
-              <Card>
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
-                  SELF HEALING
-                </p>
-                <p className="text-gray-300 text-sm">
-                  {lang === "sl"
-                    ? "Manjše praske izginejo s toploto."
-                    : lang === "de"
-                      ? "Kleine Kratzer heilen mit Wärme."
-                      : "Minor scratches disappear with heat."}
-                </p>
-              </Card>
-              <Card>
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
-                  VALUE
-                </p>
-                <p className="text-gray-300 text-sm">
-                  {lang === "sl"
-                    ? "Ohranja originalni lak in vrednost vozila."
-                    : lang === "de"
-                      ? "Erhält Originallack und Fahrzeugwert."
-                      : "Preserves original paint and resale value."}
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProtectionDemo
+        kicker={t("demoKicker")}
+        title={t("demoTitle")}
+        subtitle={t("demoSub")}
+        beforeImage={IMG.tintBefore}
+        afterImage={IMG.tintAfter}
+        benefits={[
+          {
+            label: "IMPACT",
+            text: lang === "sl"
+              ? "PPF absorbira udarce kamenčkov."
+              : lang === "de"
+                ? "PPF absorbiert Steinschläge."
+                : "PPF absorbs stone impacts.",
+          },
+          {
+            label: "SELF HEALING",
+            text: lang === "sl"
+              ? "Manjše praske izginejo s toploto."
+              : lang === "de"
+                ? "Kleine Kratzer heilen mit Wärme."
+                : "Minor scratches disappear with heat.",
+          },
+          {
+            label: "VALUE",
+            text: lang === "sl"
+              ? "Ohranja originalni lak in vrednost vozila."
+              : lang === "de"
+                ? "Erhält Originallack und Fahrzeugwert."
+                : "Preserves original paint and resale value.",
+          },
+        ]}
+      />
 
       <section className="py-20 md:py-32 px-6 border-t border-neutral-900">
         <div className="max-w-7xl mx-auto">
