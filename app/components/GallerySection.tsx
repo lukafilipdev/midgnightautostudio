@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface GalleryItem {
   src: string;
@@ -22,12 +22,11 @@ interface GallerySectionProps {
 function Chevron({ dir }: { dir: "left" | "right" }) {
   return (
     <svg
-      width="16"
-      height="16"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="opacity-90"
     >
       <path
         d={dir === "left" ? "M15 18l-6-6 6-6" : "M9 6l6 6-6 6"}
@@ -55,6 +54,7 @@ export function GallerySection({
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,41 +74,106 @@ export function GallerySection({
     return () => observer.disconnect();
   }, []);
 
-  const scrollBy = (dir: -1 | 1) => {
+  const scrollToIndex = useCallback((index: number) => {
     const el = scrollerRef.current;
     if (!el) return;
-    const amount = Math.min(el.clientWidth * 0.9, 900);
-    el.scrollBy({ left: dir * amount, behavior: "smooth" });
-  };
+    const child = el.children[index] as HTMLElement | undefined;
+    if (!child) return;
+    
+    // Calculate scroll position to center the card in the viewport
+    const containerWidth = el.clientWidth;
+    const cardWidth = child.offsetWidth;
+    const cardLeft = child.offsetLeft;
+    
+    // For the first item, scroll to start; otherwise center the card
+    const scrollTarget = index === 0 
+      ? 0 
+      : cardLeft - (containerWidth - cardWidth) / 2;
+    
+    el.scrollTo({ left: Math.max(0, scrollTarget), behavior: "smooth" });
+    setActive(index);
+  }, []);
+
+  const scrollBy = useCallback((dir: -1 | 1) => {
+    const newIndex = Math.max(0, Math.min(items.length - 1, active + dir));
+    scrollToIndex(newIndex);
+  }, [active, items.length, scrollToIndex]);
 
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const onScroll = () => {
+    
+    const calculateActiveIndex = () => {
       const children = Array.from(el.children) as HTMLElement[];
-      if (!children.length) return;
-      const mid = el.scrollLeft + el.clientWidth / 2;
+      if (!children.length) return 0;
+      
+      // Get the visible area's center point relative to the scroll container
+      const scrollLeft = el.scrollLeft;
+      const containerWidth = el.clientWidth;
+      const viewportCenter = scrollLeft + containerWidth / 2;
+      
       let bestIdx = 0;
       let bestDist = Infinity;
-      children.forEach((c, idx) => {
-        const cMid = c.offsetLeft + c.clientWidth / 2;
-        const d = Math.abs(cMid - mid);
-        if (d < bestDist) {
-          bestDist = d;
+      
+      children.forEach((child, idx) => {
+        // Calculate the center of each card
+        const cardLeft = child.offsetLeft;
+        const cardWidth = child.offsetWidth;
+        const cardCenter = cardLeft + cardWidth / 2;
+        
+        const distance = Math.abs(cardCenter - viewportCenter);
+        if (distance < bestDist) {
+          bestDist = distance;
           bestIdx = idx;
         }
       });
-      setActive(bestIdx);
+      
+      return bestIdx;
     };
-    onScroll();
+    
+    const onScroll = () => {
+      const newActive = calculateActiveIndex();
+      setActive(newActive);
+    };
+    
+    // Ensure scroll starts at position 0 and first item is active
+    el.scrollLeft = 0;
+    setActive(0);
+    
+    // Recalculate after a brief delay to ensure layout is complete
+    const initialTimer = setTimeout(() => {
+      if (el.scrollLeft === 0) {
+        setActive(0);
+      } else {
+        const initialActive = calculateActiveIndex();
+        setActive(initialActive);
+      }
+    }, 100);
+    
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+    
+    return () => {
+      clearTimeout(initialTimer);
+      el.removeEventListener("scroll", onScroll);
+    };
   }, [items.length]);
+
+  // Auto-slide
+  useEffect(() => {
+    if (isPaused || !isVisible) return;
+    const interval = setInterval(() => {
+      const nextIndex = (active + 1) % items.length;
+      scrollToIndex(nextIndex);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [active, isPaused, isVisible, items.length, scrollToIndex]);
 
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-32 px-6 border-t border-neutral-900"
+      className="gallery-section py-20 md:py-32 px-6 border-t border-white/[0.06]"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -117,13 +182,13 @@ export function GallerySection({
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          <p className="text-[10px] md:text-xs tracking-[0.35em] text-gray-500 mb-4">
+          <p className="text-[10px] md:text-xs tracking-[0.35em] text-white/40 mb-4">
             {kicker}
           </p>
           <h2 className="text-xl md:text-3xl tracking-[0.28em] md:tracking-[0.3em]">
             {title}
           </h2>
-          <p className="text-gray-400 text-xs md:text-sm max-w-2xl mx-auto mt-5 leading-relaxed whitespace-pre-line">
+          <p className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto mt-4 leading-relaxed">
             {subtitle}
           </p>
         </div>
@@ -136,15 +201,15 @@ export function GallerySection({
           style={{ transitionDelay: "150ms" }}
         >
           <div className="flex items-center justify-between mb-6">
-            <p className="text-xs tracking-[0.35em] text-gray-500">
+            <p className="text-xs tracking-[0.35em] text-white/40">
               {galleryLabel}
             </p>
-            <div className="hidden md:flex gap-2">
+            <div className="hidden md:flex gap-3">
               <button
                 type="button"
                 onClick={() => scrollBy(-1)}
                 aria-label={prevLabel}
-                className="border border-neutral-800 w-10 h-10 rounded-full text-gray-200 hover:border-white transition flex items-center justify-center"
+                className="gallery-nav-btn"
               >
                 <Chevron dir="left" />
               </button>
@@ -152,34 +217,40 @@ export function GallerySection({
                 type="button"
                 onClick={() => scrollBy(1)}
                 aria-label={nextLabel}
-                className="border border-neutral-800 w-10 h-10 rounded-full text-gray-200 hover:border-white transition flex items-center justify-center"
+                className="gallery-nav-btn"
               >
                 <Chevron dir="right" />
               </button>
             </div>
           </div>
 
+          <div className="gallery-wrapper relative">
           <div
             ref={scrollerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:mx-0 md:px-0"
-            style={{ scrollBehavior: "smooth" }}
+            className="gallery-track flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:mx-0 md:px-0"
           >
             {items.map((it, idx) => (
-              <div key={idx} className="snap-center shrink-0 w-[88%] md:w-[520px]">
-                <div className="rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-950">
+              <div
+                key={idx}
+                onClick={() => scrollToIndex(idx)}
+                className={`gallery-card snap-center shrink-0 w-[85%] md:w-[520px] cursor-pointer ${
+                  idx === active ? "gallery-card-active" : ""
+                }`}
+              >
+                <div className="gallery-card-inner rounded-2xl md:rounded-3xl overflow-hidden border border-white/[0.06]">
                   <div className="relative">
                     <img
                       src={it.src}
                       alt={it.label}
-                      className="w-full h-[340px] md:h-[420px] object-cover"
+                      className="gallery-card-image w-full h-[320px] md:h-[420px] object-cover"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-black/0" />
-                    <div className="absolute bottom-5 left-6 right-6">
-                      <p className="text-sm md:text-base tracking-wide">
+                    <div className="gallery-card-overlay" />
+                    <div className="absolute bottom-6 left-6 right-6 z-10">
+                      <p className="text-sm md:text-base font-semibold tracking-wide">
                         {it.label}
                       </p>
-                      <p className="text-xs text-gray-300 mt-1">
+                      <p className="text-xs text-white/65 mt-1.5">
                         {detailText}
                       </p>
                     </div>
@@ -188,7 +259,19 @@ export function GallerySection({
               </div>
             ))}
           </div>
+          </div>
 
+          {/* Progress Bar */}
+          <div className="mt-6 flex items-center justify-center">
+            <div className="gallery-progress-track">
+              <div
+                className="gallery-progress-fill"
+                style={{ width: `${((active + 1) / items.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Dots */}
           <div
             className="flex items-center justify-center gap-2 mt-4"
             aria-label="Gallery progress"
@@ -198,17 +281,8 @@ export function GallerySection({
                 key={i}
                 type="button"
                 aria-label={`${dotLabel} ${i + 1}`}
-                onClick={() => {
-                  const el = scrollerRef.current;
-                  if (!el) return;
-                  const child = el.children[i] as HTMLElement | undefined;
-                  if (!child) return;
-                  el.scrollTo({ left: child.offsetLeft - 24, behavior: "smooth" });
-                }}
-                className={
-                  "h-2 rounded-full transition-all border border-neutral-700 " +
-                  (i === active ? "w-8 bg-white" : "w-2 bg-transparent")
-                }
+                onClick={() => scrollToIndex(i)}
+                className={`gallery-dot ${i === active ? "gallery-dot-active" : ""}`}
               />
             ))}
           </div>
