@@ -10,6 +10,7 @@ import { MaterialsSection } from "./components/MaterialsSection";
 import { StudioSection } from "./components/StudioSection";
 import { FeaturedBuildsSection } from "./components/FeaturedBuildsSection";
 import { GallerySection } from "./components/GallerySection";
+import { ConfiguratorSection } from "./components/ConfiguratorSection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -633,8 +634,6 @@ export default function Home() {
   const [service, setService] = useState("");
   const [tintSlider, setTintSlider] = useState(52);
   const [paintSlider, setPaintSlider] = useState(50);
-  const [finish, setFinish] = useState<"gloss" | "satin" | "matte">("gloss");
-  const [coverage, setCoverage] = useState(70);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -715,12 +714,6 @@ export default function Home() {
     []
   );
 
-  const finishImg =
-    finish === "gloss"
-      ? IMG.cfgGloss
-      : finish === "satin"
-        ? IMG.cfgSatin
-        : IMG.cfgMatte;
 
   return (
     <main className="bg-black text-white min-h-screen overflow-x-hidden">
@@ -844,135 +837,32 @@ export default function Home() {
         detailText={lang === "sl" ? "Butični finish · Precizni robovi · Studijska osvetlitev" : lang === "de" ? "Boutique-Finish · Präzise Kanten · Studiobeleuchtung" : "Boutique finish · Precision edges · Studio lighting"}
       />
 
-      <section className="py-20 md:py-32 px-6 border-t border-neutral-900 bg-black">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div data-reveal>
-            <p className="text-[10px] md:text-xs tracking-[0.35em] text-gray-500 mb-4">
-              {t("cfgKicker")}
-            </p>
-            <h2 className="text-xl md:text-3xl tracking-[0.28em] md:tracking-[0.3em] mb-6">
-              {t("cfgTitle")}
-            </h2>
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8">
-              {t("cfgText")}
-            </p>
-            <div className="space-y-4">
-              {[t("cfgB1"), t("cfgB2"), t("cfgB3")].map((txt, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <div className="w-2 h-2 rounded-full bg-white mt-2" />
-                  <p className="text-gray-300 text-sm">{txt}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-10 flex flex-col sm:flex-row gap-3">
-              <a
-                href="#booking"
-                className="border border-white px-7 py-3 rounded-full text-sm hover:bg-white hover:text-black transition text-center"
-              >
-                {t("cfgCta1")}
-              </a>
-              <a
-                href="#projects"
-                className="border border-neutral-700 px-7 py-3 rounded-full text-sm text-gray-200 hover:border-white transition text-center"
-              >
-                {t("cfgCta2")}
-              </a>
-            </div>
-          </div>
-          <div
-            className="bg-neutral-950 rounded-3xl border border-neutral-800 overflow-hidden"
-            data-reveal
-          >
-            <div className="p-6 border-b border-neutral-800 flex items-center justify-between">
-              <p className="text-[10px] md:text-xs tracking-[0.35em] text-gray-400">
-                {t("miniCfg")}
-              </p>
-              <p className="text-xs text-gray-500">{t("interactive")}</p>
-            </div>
-            <div className="p-6">
-              <div className="flex flex-col gap-5 mb-6">
-                <div>
-                  <p className="text-xs text-gray-500 mb-3">{t("finish")}</p>
-                  <div className="grid grid-cols-3 gap-3">
-                    {(
-                      [
-                        ["gloss", t("gloss")],
-                        ["satin", t("satin")],
-                        ["matte", t("matte")],
-                      ] as const
-                    ).map(([k, label]) => (
-                      <button
-                        key={k}
-                        type="button"
-                        onClick={() => setFinish(k)}
-                        className={
-                          "rounded-full border px-4 py-2 text-xs tracking-wide transition " +
-                          (finish === k
-                            ? "border-white bg-white text-black"
-                            : "border-neutral-800 text-gray-200 hover:border-white")
-                        }
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-xs text-gray-500">{t("coverage")}</p>
-                    <p className="text-xs text-gray-300">{coverage}%</p>
-                  </div>
-                  <input
-                    type="range"
-                    min={20}
-                    max={100}
-                    value={coverage}
-                    onChange={(e) => setCoverage(Number(e.target.value))}
-                    className="w-full"
-                  />
-                  <p className="text-[11px] text-gray-500 mt-2">
-                    {t("coverageHint")}
-                  </p>
-                </div>
-              </div>
-              <div className="rounded-2xl overflow-hidden bg-black border border-neutral-800 relative">
-                <img
-                  src={finishImg}
-                  alt="Configurator preview"
-                  className="w-full h-[320px] md:h-[360px] object-cover"
-                  loading="lazy"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{ clipPath: `inset(0 ${100 - coverage}% 0 0)` }}
-                >
-                  <div className="absolute inset-0 bg-white/10" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/18 via-white/0 to-white/0" />
-                  <div className="absolute top-5 left-5 border border-white/50 rounded-full px-3 py-1 text-[10px] tracking-[0.35em] text-white/90">
-                    {t("ppfCoverage")}
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                {[
-                  [t("finish"), finish.toUpperCase()],
-                  [t("coverage"), `${coverage}%`],
-                  [t("details"), t("accents")],
-                  [t("approval"), t("beforeInstall")],
-                ].map(([k, v], i) => (
-                  <div
-                    key={i}
-                    className="bg-black/40 border border-neutral-800 rounded-2xl p-4"
-                  >
-                    <p className="text-xs text-gray-500 mb-1">{k}</p>
-                    <p className="text-sm text-gray-200">{v}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ConfiguratorSection
+        kicker={t("cfgKicker")}
+        title={t("cfgTitle")}
+        description={t("cfgText")}
+        bullets={[t("cfgB1"), t("cfgB2"), t("cfgB3")]}
+        cta1Text={t("cfgCta1")}
+        cta2Text={t("cfgCta2")}
+        miniCfgLabel={t("miniCfg")}
+        interactiveLabel={t("interactive")}
+        finishLabel={t("finish")}
+        glossLabel={t("gloss")}
+        satinLabel={t("satin")}
+        matteLabel={t("matte")}
+        coverageLabel={t("coverage")}
+        coverageHint={t("coverageHint")}
+        ppfCoverageLabel={t("ppfCoverage")}
+        detailsLabel={t("details")}
+        accentsLabel={t("accents")}
+        approvalLabel={t("approval")}
+        beforeInstallLabel={t("beforeInstall")}
+        images={{
+          gloss: IMG.cfgGloss,
+          satin: IMG.cfgSatin,
+          matte: IMG.cfgMatte,
+        }}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
         <div className="max-w-6xl mx-auto text-center">
