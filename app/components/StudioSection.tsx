@@ -35,35 +35,41 @@ export function StudioSection({ kicker, title, description, features, imageSrc }
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black"
+      className="studio-section relative py-20 md:py-28 px-6 border-t border-white/[0.06]"
     >
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      {/* Vertical divider - desktop only */}
+      <div className="hidden md:block studio-divider" />
+
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
         {/* Text Content */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`studio-text transition-all duration-700 ease-out ${
+            isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-5"
           }`}
         >
-          <p className="text-xs tracking-[0.35em] text-gray-500 mb-4">
+          <p className="text-[11px] md:text-xs tracking-[0.35em] text-white/40 mb-4 uppercase">
             {kicker}
           </p>
-          <h2 className="text-2xl md:text-3xl tracking-[0.3em] mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-[-0.01em] leading-[1.2] mb-5">
             {title}
           </h2>
-          <p className="text-gray-400 leading-relaxed mb-6">
+          <p className="text-white/[0.78] leading-[1.65] mb-5 max-w-[480px]">
             {description}
           </p>
-          <div className="space-y-3 text-sm text-gray-300">
+          <div className="space-y-2">
             {features.map((feature, i) => (
-              <p key={i}>• {feature}</p>
+              <p key={i} className="studio-feature text-sm text-white/70 flex items-center">
+                <span className="studio-bullet" />
+                {feature}
+              </p>
             ))}
           </div>
         </div>
 
         {/* Image */}
         <div
-          className={`rounded-3xl overflow-hidden border border-neutral-800 transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`studio-image-wrapper transition-all duration-700 ease-out ${
+            isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-5"
           }`}
           style={{ transitionDelay: "150ms" }}
         >

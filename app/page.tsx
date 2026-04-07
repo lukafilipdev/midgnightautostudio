@@ -8,6 +8,7 @@ import { WhySection } from "./components/WhySection";
 import { ProcessSection } from "./components/ProcessSection";
 import { MaterialsSection } from "./components/MaterialsSection";
 import { StudioSection } from "./components/StudioSection";
+import { FeaturedBuildsSection } from "./components/FeaturedBuildsSection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -957,37 +958,16 @@ export default function Home() {
               ? ["LED-Studiobeleuchtung", "Staubkontrollierter Arbeitsbereich", "Temperaturgeregelte Installation", "Präzisionsschnitt und Kantenumwicklung"]
               : ["LED studio lighting", "Dust controlled workspace", "Temperature regulated installation", "Precision cutting & edge wrapping"]
         }
-        imageSrc={IMG.studio}
+        imageSrc="/midnight-studio.png"
       />
 
-      <section id="projects" className="py-20 md:py-32 px-6 border-t border-neutral-900">
-        <SectionTitle
-          kicker={t("selectedKicker")}
-          title={t("featuredTitle")}
-          subtitle={t("featuredSub")}
-        />
-        <div
-          className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10"
-          data-reveal
-        >
-          {projects.map((p, i) => (
-            <div key={i} className="group">
-              <div className="overflow-hidden rounded-3xl bg-neutral-950 border border-neutral-800">
-                <img
-                  src={p.src}
-                  alt={p.label}
-                  className="w-full h-[320px] md:h-[360px] object-cover group-hover:scale-105 transition duration-700"
-                  loading="lazy"
-                />
-              </div>
-              <p className="mt-4 text-gray-300 text-sm text-center">{p.label}</p>
-              <p className="text-gray-500 text-xs text-center mt-1">
-                Design preview · Studio installation
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <FeaturedBuildsSection
+        kicker={t("selectedKicker")}
+        title={t("featuredTitle")}
+        subtitle={t("featuredSub")}
+        projects={projects}
+        installationText={lang === "sl" ? "3D predogled · Studijska montaža" : lang === "de" ? "3D-Vorschau · Studio-Installation" : "Design preview · Studio installation"}
+      />
 
       <section className="py-20 md:py-32 px-6 border-t border-neutral-900">
         <div className="max-w-7xl mx-auto">
