@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Stats } from "./components/Stats";
+import { WhySection } from "./components/WhySection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -880,30 +881,16 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
-        <div className="max-w-6xl mx-auto">
-          <SectionTitle
-            kicker={t("whyKicker")}
-            title={t("whyTitle")}
-            subtitle={t("whySub")}
-          />
-          <div className="grid md:grid-cols-3 gap-8" data-reveal>
-            {[
-              ["01", t("why1t"), t("why1d")],
-              ["02", t("why2t"), t("why2d")],
-              ["03", t("why3t"), t("why3d")],
-            ].map(([n, tt, d], i) => (
-              <Card key={i}>
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
-                  {n}
-                </p>
-                <h3 className="text-lg mb-3">{tt}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{d}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhySection
+        kicker={t("whyKicker")}
+        title={t("whyTitle")}
+        subtitle={t("whySub")}
+        items={[
+          { number: "01", title: t("why1t"), description: t("why1d") },
+          { number: "02", title: t("why2t"), description: t("why2d") },
+          { number: "03", title: t("why3t"), description: t("why3d") },
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
         <div className="max-w-6xl mx-auto">
