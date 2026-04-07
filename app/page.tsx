@@ -5,6 +5,7 @@ import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Stats } from "./components/Stats";
 import { WhySection } from "./components/WhySection";
+import { ProcessSection } from "./components/ProcessSection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -892,101 +893,43 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
-        <div className="max-w-6xl mx-auto">
-          <SectionTitle
-            kicker={t("processKicker")}
-            title={t("processTitle")}
-            subtitle={t("processSub")}
-          />
-          <div className="grid md:grid-cols-3 gap-8" data-reveal>
-            {[
-              [
-                "01",
-                lang === "sl"
-                  ? "Posvet"
-                  : lang === "de"
-                    ? "Beratung"
-                    : "Consultation",
-                lang === "sl"
-                  ? "Pregled vozila in ciljev projekta."
-                  : lang === "de"
-                    ? "Analyse des Fahrzeugs und der Ziele."
-                    : "Vehicle inspection and project goals.",
-              ],
-              [
-                "02",
-                "3D Preview",
-                lang === "sl"
-                  ? "Vizualizacija barve, finisha in detajlov."
-                  : lang === "de"
-                    ? "Visualisierung von Finish und Details."
-                    : "Design preview before installation.",
-              ],
-              [
-                "03",
-                lang === "sl"
-                  ? "Priprava"
-                  : lang === "de"
-                    ? "Vorbereitung"
-                    : "Preparation",
-                lang === "sl"
-                  ? "Temeljito čiščenje in dekontaminacija."
-                  : lang === "de"
-                    ? "Gründliche Reinigung und Vorbereitung."
-                    : "Deep cleaning and surface preparation.",
-              ],
-              [
-                "04",
-                lang === "sl"
-                  ? "Montaža"
-                  : lang === "de"
-                    ? "Installation"
-                    : "Installation",
-                lang === "sl"
-                  ? "Natančna studijska montaža."
-                  : lang === "de"
-                    ? "Präzise Studio-Installation."
-                    : "Precision film installation.",
-              ],
-              [
-                "05",
-                lang === "sl"
-                  ? "Kontrola"
-                  : lang === "de"
-                    ? "Qualitätskontrolle"
-                    : "Quality Control",
-                lang === "sl"
-                  ? "Kontrola robov, linij in površine."
-                  : lang === "de"
-                    ? "Kontrolle von Kanten und Oberflächen."
-                    : "Edge and surface inspection.",
-              ],
-              [
-                "06",
-                lang === "sl"
-                  ? "Predaja"
-                  : lang === "de"
-                    ? "Übergabe"
-                    : "Delivery",
-                lang === "sl"
-                  ? "Vozilo pripravljeno za prevzem."
-                  : lang === "de"
-                    ? "Fahrzeug bereit zur Übergabe."
-                    : "Vehicle ready for collection.",
-              ],
-            ].map(([n, tt, d], i) => (
-              <Card key={i}>
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
-                  {n}
-                </p>
-                <h3 className="text-base mb-2">{tt}</h3>
-                <p className="text-gray-400 text-sm">{d}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProcessSection
+        kicker={t("processKicker")}
+        title={t("processTitle")}
+        subtitle={t("processSub")}
+        steps={[
+          {
+            number: "01",
+            title: lang === "sl" ? "Posvet" : lang === "de" ? "Beratung" : "Consultation",
+            description: lang === "sl" ? "Pregled vozila in ciljev projekta." : lang === "de" ? "Analyse des Fahrzeugs und der Ziele." : "Vehicle inspection and project goals.",
+          },
+          {
+            number: "02",
+            title: "3D Preview",
+            description: lang === "sl" ? "Vizualizacija barve, finisha in detajlov." : lang === "de" ? "Visualisierung von Finish und Details." : "Design preview before installation.",
+          },
+          {
+            number: "03",
+            title: lang === "sl" ? "Priprava" : lang === "de" ? "Vorbereitung" : "Preparation",
+            description: lang === "sl" ? "Temeljito čiščenje in dekontaminacija." : lang === "de" ? "Gründliche Reinigung und Vorbereitung." : "Deep cleaning and surface preparation.",
+          },
+          {
+            number: "04",
+            title: lang === "sl" ? "Montaža" : lang === "de" ? "Installation" : "Installation",
+            description: lang === "sl" ? "Natančna studijska montaža." : lang === "de" ? "Präzise Studio-Installation." : "Precision film installation.",
+          },
+          {
+            number: "05",
+            title: lang === "sl" ? "Kontrola" : lang === "de" ? "Qualitätskontrolle" : "Quality Control",
+            description: lang === "sl" ? "Kontrola robov, linij in površine." : lang === "de" ? "Kontrolle von Kanten und Oberflächen." : "Edge and surface inspection.",
+          },
+          {
+            number: "06",
+            title: lang === "sl" ? "Predaja" : lang === "de" ? "Übergabe" : "Delivery",
+            description: lang === "sl" ? "Vozilo pripravljeno za prevzem." : lang === "de" ? "Fahrzeug bereit zur Übergabe." : "Vehicle ready for collection.",
+          },
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900">
         <div className="max-w-6xl mx-auto text-center">
