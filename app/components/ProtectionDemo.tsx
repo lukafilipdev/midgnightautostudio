@@ -11,8 +11,6 @@ interface ProtectionDemoProps {
   kicker: string;
   title: string;
   subtitle: string;
-  beforeImage: string;
-  afterImage: string;
   benefits: BenefitCard[];
 }
 
@@ -20,13 +18,14 @@ export function ProtectionDemo({
   kicker,
   title,
   subtitle,
-  beforeImage,
-  afterImage,
   benefits,
 }: ProtectionDemoProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const [isVisible, setIsVisible] = useState(false);
-  const [sliderValue, setSliderValue] = useState(50);
+  const [slider, setSlider] = useState(50);
+  const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,96 +38,185 @@ export function ProtectionDemo({
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
     return () => observer.disconnect();
   }, []);
 
+  const updateSlider = (clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    const clamped = Math.max(0, Math.min(100, percentage));
+
+    setSlider(clamped);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragging(true);
+    updateSlider(e.clientX);
+  };
+
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      updateSlider(e.clientX);
+    };
+
+    const handlePointerUp = () => {
+      setDragging(false);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+  }, [dragging]);
+
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950"
+      className="border-t border-white/[0.06] bg-black px-6 py-20 md:py-28"
     >
-      <div className="max-w-6xl mx-auto text-center">
-        {/* Header */}
+      <div className="mx-auto max-w-[1100px]">
         <div
-          className={`text-center mb-12 md:mb-16 transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`mb-12 text-center transition-all duration-700 ease-out md:mb-14 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
-          {kicker && (
-            <p className="text-[10px] md:text-xs tracking-[0.35em] text-white/40 mb-4">
-              {kicker}
-            </p>
-          )}
-          <h2 className="text-xl md:text-3xl tracking-[0.28em] md:tracking-[0.3em]">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.35em] text-white/40 md:text-xs">
+            {kicker}
+          </p>
+
+          <h2 className="text-xl uppercase tracking-[0.22em] md:text-3xl md:tracking-[0.26em]">
             {title}
           </h2>
-          {subtitle && (
-            <p className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto mt-4 leading-relaxed">
-              {subtitle}
-            </p>
-          )}
+
+          <p className="mx-auto mt-4 max-w-2xl text-xs leading-relaxed text-white/60 md:text-sm">
+            {subtitle}
+          </p>
         </div>
 
-        {/* Slider Comparison */}
         <div
-          className={`max-w-5xl mx-auto transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`transition-all duration-700 ease-out ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
-          style={{ transitionDelay: "150ms" }}
+          style={{ transitionDelay: "120ms" }}
         >
-          <div className="relative rounded-3xl overflow-hidden border border-neutral-800 bg-black">
-            <img
-              src={beforeImage}
-              className="w-full"
-              alt="Before protection"
-              loading="lazy"
-            />
-            <div
-              className="absolute top-0 left-0 h-full overflow-hidden"
-              style={{ width: `${sliderValue}%` }}
-            >
+          <div
+            ref={containerRef}
+            onPointerDown={handlePointerDown}
+            className="group relative mx-auto aspect-[16/9] max-w-5xl cursor-ew-resize overflow-hidden rounded-[28px] border border-white/[0.08] bg-black shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
+            style={{ touchAction: "none" }}
+          >
+            {/* Base image = protected (right side remains protected) */}
+            <div className="absolute inset-0">
               <img
-                src={afterImage}
-                className="w-full h-full object-cover"
-                alt="After protection"
-                loading="lazy"
-                style={{ minWidth: "100%" }}
+                src="/after1.png"
+                alt="Zaščiten lak"
+                className="h-full w-full object-cover pointer-events-none select-none"
+                draggable={false}
               />
             </div>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={sliderValue}
-              onChange={(e) => setSliderValue(Number(e.target.value))}
-              className="absolute bottom-5 left-1/2 -translate-x-1/2 w-3/4"
+
+            {/* Revealed overlay image = unprotected (left side reveals Brez PPF) */}
+            <div
+              className="absolute inset-y-0 left-0 overflow-hidden"
+              style={{ width: `${slider}%` }}
+            >
+              <div
+                className="absolute inset-y-0 left-0"
+                style={{ width: containerRef.current?.offsetWidth || "100%" }}
+              >
+                <img
+                  src="/before1.png"
+                  alt="Lak brez PPF"
+                  className="h-full w-full object-cover pointer-events-none select-none"
+                  draggable={false}
+                />
+              </div>
+            </div>
+
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent" />
+
+            <div className="absolute left-4 top-4 rounded-full border border-white/[0.14] bg-black/45 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.24em] text-white/80 backdrop-blur-sm md:left-5 md:top-5">
+              Brez PPF
+            </div>
+
+            <div className="absolute right-4 top-4 rounded-full border border-white/[0.14] bg-black/45 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.24em] text-white/80 backdrop-blur-sm md:right-5 md:top-5">
+              Zaščiten lak
+            </div>
+
+            <div
+              className="absolute bottom-0 top-0 z-20 w-px bg-white/35 shadow-[0_0_8px_rgba(255,255,255,0.15)]"
+              style={{ left: `${slider}%`, transform: "translateX(-50%)" }}
             />
+
+            <div
+              className="absolute top-1/2 z-30"
+              style={{
+                left: `${slider}%`,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/70 shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition-all duration-200 ease-out group-hover:scale-105">
+                <div className="flex items-center gap-[3px]">
+                  <span className="block h-4 w-px bg-white/70" />
+                  <span className="block h-4 w-px bg-white/70" />
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Benefit Cards */}
-          <div
-            className={`grid md:grid-cols-3 gap-6 mt-10 transition-all duration-700 ease-out ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-            style={{ transitionDelay: "300ms" }}
-          >
-            {benefits.map((benefit, idx) => (
+          <p className="mt-4 text-center text-[11px] tracking-[0.08em] text-white/50 md:text-xs">
+            Povleci za primerjavo zaščite
+          </p>
+        </div>
+
+        <div
+          className={`mt-12 transition-all duration-700 ease-out md:mt-14 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}
+          style={{ transitionDelay: "260ms" }}
+        >
+          <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+            {benefits.map((benefit, i) => (
               <div
-                key={idx}
-                className="bg-neutral-950 border border-neutral-800 rounded-3xl p-8"
+                key={i}
+                className={`text-center transition-all duration-700 ease-out md:text-left ${
+                  isVisible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+                }`}
+                style={{ transitionDelay: `${320 + i * 80}ms` }}
               >
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
+                <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-white/40 md:text-xs">
                   {benefit.label}
                 </p>
-                <p className="text-gray-300 text-sm">{benefit.text}</p>
+
+                <p className="mx-auto max-w-[280px] text-sm leading-[1.6] text-white/[0.78] md:mx-0">
+                  {benefit.text}
+                </p>
               </div>
             ))}
           </div>
         </div>
+
+        <div
+          className={`mx-auto mt-14 h-px w-full max-w-[800px] transition-opacity duration-700 md:mt-16 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+          style={{
+            background:
+              "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)",
+            transitionDelay: "500ms",
+          }}
+        />
       </div>
     </section>
   );
