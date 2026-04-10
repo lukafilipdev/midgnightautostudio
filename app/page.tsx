@@ -12,6 +12,9 @@ import { FeaturedBuildsSection } from "./components/FeaturedBuildsSection";
 import { GallerySection } from "./components/GallerySection";
 import { ConfiguratorSection } from "./components/ConfiguratorSection";
 import { ProtectionDemo } from "./components/ProtectionDemo";
+import { ServicesSection } from "./components/ServicesSection";
+import { PricingSection } from "./components/PricingSection";
+import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -593,43 +596,6 @@ function useRevealOnScroll() {
 }
 
 
-function SectionTitle({
-  kicker,
-  title,
-  subtitle,
-}: {
-  kicker?: string;
-  title: string;
-  subtitle?: string;
-}) {
-  return (
-    <div className="text-center mb-12 md:mb-16" data-reveal>
-      {kicker ? (
-        <p className="text-[10px] md:text-xs tracking-[0.35em] text-gray-500 mb-4">
-          {kicker}
-        </p>
-      ) : null}
-      <h2 className="text-xl md:text-3xl tracking-[0.28em] md:tracking-[0.3em]">
-        {title}
-      </h2>
-      {subtitle ? (
-        <p className="text-gray-400 text-xs md:text-sm max-w-2xl mx-auto mt-5 leading-relaxed whitespace-pre-line">
-          {subtitle}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-
-function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-neutral-950 border border-neutral-800 rounded-3xl p-8">
-      {children}
-    </div>
-  );
-}
-
 export default function Home() {
   const [lang, setLang] = useState<Lang>("sl");
   const [service, setService] = useState("");
@@ -882,57 +848,41 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-32 px-6 border-t border-neutral-900">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle
-            kicker={t("offerKicker")}
-            title={t("servicesTitle")}
-            subtitle={t("servicesSub")}
-          />
-          <div className="grid md:grid-cols-4 gap-6" data-reveal>
-            {[
-              [t("s1t"), t("s1d")],
-              [t("s2t"), t("s2d")],
-              [t("s3t"), t("s3d")],
-              [t("s4t"), t("s4d")],
-            ].map(([tt, d], i) => (
-              <Card key={i}>
-                <h3 className="text-base md:text-lg mb-3">{tt}</h3>
-                <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
-                  {d}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesSection
+        kicker={t("offerKicker")}
+        title={t("servicesTitle")}
+        subtitle={t("servicesSub")}
+        items={[
+          { title: t("s1t"), description: t("s1d") },
+          { title: t("s2t"), description: t("s2d") },
+          { title: t("s3t"), description: t("s3d") },
+          { title: t("s4t"), description: t("s4d") },
+        ]}
+      />
 
-      <section className="py-20 md:py-32 px-6 border-t border-neutral-900 text-center">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle
-            kicker={t("pricingKicker")}
-            title={t("investmentTitle")}
-            subtitle={t("investmentSub")}
-          />
-          <div className="grid md:grid-cols-3 gap-10" data-reveal>
-            <Card>
-              <h3 className="mb-4">{t("pack1")}</h3>
-              <p className="text-3xl mb-4">{t("pack1p")}</p>
-              <p className="text-gray-400 text-sm">{t("pack1d")}</p>
-            </Card>
-            <div className="bg-white text-black p-10 rounded-3xl md:scale-105 shadow-xl">
-              <h3 className="mb-4">{t("pack2")}</h3>
-              <p className="text-3xl mb-4">{t("pack2p")}</p>
-              <p className="text-sm">{t("pack2d")}</p>
-            </div>
-            <Card>
-              <h3 className="mb-4">{t("pack3")}</h3>
-              <p className="text-3xl mb-4">{t("pack3p")}</p>
-              <p className="text-gray-400 text-sm">{t("pack3d")}</p>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <PricingSection
+        kicker={t("pricingKicker")}
+        title={t("investmentTitle")}
+        subtitle={t("investmentSub")}
+        packs={[
+          {
+            name: t("pack1"),
+            price: t("pack1p"),
+            description: t("pack1d"),
+          },
+          {
+            name: t("pack2"),
+            price: t("pack2p"),
+            description: t("pack2d"),
+            highlight: true,
+          },
+          {
+            name: t("pack3"),
+            price: t("pack3p"),
+            description: t("pack3d"),
+          },
+        ]}
+      />
 
       <section className="py-20 md:py-32 px-6 border-t border-neutral-900">
         <div className="max-w-7xl mx-auto">
