@@ -23,6 +23,7 @@ import { ClientVehiclesSection } from "./components/ClientVehiclesSection";
 import { WarrantySection } from "./components/WarrantySection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { BookingSection } from "./components/BookingSection";
+import { Footer } from "./components/Footer";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -1157,37 +1158,7 @@ export default function Home() {
         contact={CONTACT}
       />
 
-      <footer className="text-center py-10 text-gray-600 text-xs border-t border-neutral-900">
-        <div className="max-w-7xl mx-auto px-6 space-y-3">
-          <p>{t("footer")}</p>
-          <div className="flex items-center justify-center gap-4 text-[11px] text-gray-500">
-            <a
-              href={`mailto:${CONTACT.email}`}
-              className="hover:text-white transition"
-            >
-              {CONTACT.email}
-            </a>
-            <span>•</span>
-            <a
-              href={CONTACT.instagram}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-white transition"
-            >
-              Instagram
-            </a>
-            <span>•</span>
-            <a
-              href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-white transition"
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer tagline={t("footer")} contact={CONTACT} />
 
       {showStickyCta ? (
         <div className="fixed bottom-4 left-0 right-0 z-[80] px-4 md:hidden pointer-events-none">
