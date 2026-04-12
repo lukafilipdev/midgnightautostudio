@@ -17,6 +17,8 @@ import { PricingSection } from "./components/PricingSection";
 import { WindowTintSection } from "./components/WindowTintSection";
 import { GuaranteeSection } from "./components/GuaranteeSection";
 import { CareSection } from "./components/CareSection";
+import { DeliverySection } from "./components/DeliverySection";
+import { CertificateSection } from "./components/CertificateSection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -1043,125 +1045,65 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div data-reveal>
-            <p className="text-xs tracking-[0.35em] text-gray-500 mb-4">
-              {t("deliveryKicker")}
-            </p>
-            <h2 className="text-2xl md:text-3xl tracking-[0.3em] mb-6">
-              {t("deliveryTitle")}
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              {t("deliveryText")}
-            </p>
-            <div className="space-y-3 text-sm text-gray-300">
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Garancijska knjižica"
-                  : lang === "de"
-                    ? "Garantieheft"
-                    : "Warranty booklet"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Navodila za vzdrževanje"
-                  : lang === "de"
-                    ? "Pflegeanleitung"
-                    : "Care instructions"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Studio certifikat projekta"
-                  : lang === "de"
-                    ? "Studio Zertifikat"
-                    : "Studio certificate"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Priporočila za nadaljnje vzdrževanje"
-                  : lang === "de"
-                    ? "Empfehlungen zur Pflege"
-                    : "Maintenance recommendations"}
-              </p>
-            </div>
-          </div>
-          <div
-            className="rounded-3xl overflow-hidden border border-neutral-800"
-            data-reveal
-          >
-            <img
-              src={IMG.delivery}
-              className="w-full h-[420px] object-cover"
-              alt="Delivery"
-            />
-          </div>
-        </div>
-      </section>
+      <DeliverySection
+        kicker={t("deliveryKicker")}
+        title={t("deliveryTitle")}
+        description={t("deliveryText")}
+        imageSrc={IMG.delivery}
+        imageAlt="Delivery"
+        bullets={[
+          lang === "sl"
+            ? "Garancijska knjižica"
+            : lang === "de"
+              ? "Garantieheft"
+              : "Warranty booklet",
+          lang === "sl"
+            ? "Navodila za vzdrževanje"
+            : lang === "de"
+              ? "Pflegeanleitung"
+              : "Care instructions",
+          lang === "sl"
+            ? "Studio certifikat projekta"
+            : lang === "de"
+              ? "Studio Zertifikat"
+              : "Studio certificate",
+          lang === "sl"
+            ? "Priporočila za nadaljnje vzdrževanje"
+            : lang === "de"
+              ? "Empfehlungen zur Pflege"
+              : "Maintenance recommendations",
+        ]}
+      />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div data-reveal>
-            <p className="text-xs tracking-[0.35em] text-gray-500 mb-4">
-              {t("certKicker")}
-            </p>
-            <h2 className="text-2xl md:text-3xl tracking-[0.3em] mb-6">
-              {t("certTitle")}
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              {t("certText")}
-            </p>
-            <div className="space-y-3 text-sm text-gray-300">
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Model vozila"
-                  : lang === "de"
-                    ? "Fahrzeugmodell"
-                    : "Vehicle model"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Datum montaže"
-                  : lang === "de"
-                    ? "Installationsdatum"
-                    : "Installation date"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Uporabljena folija"
-                  : lang === "de"
-                    ? "Verwendete Folie"
-                    : "Film used"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Podpis studia"
-                  : lang === "de"
-                    ? "Studio Unterschrift"
-                    : "Studio signature"}
-              </p>
-            </div>
-          </div>
-          <div
-            className="rounded-3xl overflow-hidden border border-neutral-800"
-            data-reveal
-          >
-            <img
-              src={IMG.certificate}
-              className="w-full h-[420px] object-cover"
-              alt="Certificate"
-            />
-          </div>
-        </div>
-      </section>
+      <CertificateSection
+        kicker={t("certKicker")}
+        title={t("certTitle")}
+        description={t("certText")}
+        imageSrc={IMG.certificate}
+        imageAlt="Certificate"
+        bullets={[
+          lang === "sl"
+            ? "Model vozila"
+            : lang === "de"
+              ? "Fahrzeugmodell"
+              : "Vehicle model",
+          lang === "sl"
+            ? "Datum montaže"
+            : lang === "de"
+              ? "Installationsdatum"
+              : "Installation date",
+          lang === "sl"
+            ? "Uporabljena folija"
+            : lang === "de"
+              ? "Verwendete Folie"
+              : "Film used",
+          lang === "sl"
+            ? "Podpis studia"
+            : lang === "de"
+              ? "Studio Unterschrift"
+              : "Studio signature",
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
         <div className="max-w-6xl mx-auto text-center">
