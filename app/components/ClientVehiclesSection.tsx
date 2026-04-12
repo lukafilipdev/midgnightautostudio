@@ -39,10 +39,9 @@ export function ClientVehiclesSection({
   return (
     <section
       ref={sectionRef}
-      className="materials-section py-20 md:py-28 px-6 border-t border-white/[0.06]"
+      className="relative overflow-hidden py-20 md:py-28 px-6 border-t border-white/[0.06]"
     >
-      <div className="max-w-6xl mx-auto text-center">
-        {/* Header */}
+      <div className="max-w-6xl mx-auto text-center relative z-10">
         <div
           className={`text-center mb-8 md:mb-10 transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -61,9 +60,7 @@ export function ClientVehiclesSection({
           </p>
         </div>
 
-        {/* Brand cards */}
         <div className="relative mt-10">
-          {/* Subtle background line */}
           <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px -translate-y-1/2 bg-white/[0.018] z-0" />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 relative z-10">
@@ -88,6 +85,10 @@ export function ClientVehiclesSection({
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
+        <div className="h-full w-[720px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.025),transparent_70%)]" />
       </div>
     </section>
   );

@@ -43,7 +43,7 @@ export function WarrantySection({
   return (
     <section
       ref={sectionRef}
-      className="studio-section relative py-20 md:py-28 px-6 border-t border-white/[0.06]"
+      className="relative overflow-hidden py-20 md:py-28 px-6 border-t border-white/[0.06]"
     >
       {/* Vertical divider */}
       <div className="hidden md:block studio-divider" />
@@ -52,7 +52,9 @@ export function WarrantySection({
         {/* Text */}
         <div
           className={`studio-text transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-5"
+            isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-5"
           }`}
         >
           <p className="text-[11px] md:text-xs tracking-[0.35em] text-white/40 mb-4 uppercase">
@@ -83,7 +85,9 @@ export function WarrantySection({
         {/* Image */}
         <div
           className={`studio-image-wrapper transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-5"
+            isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-5"
           }`}
           style={{ transitionDelay: "150ms" }}
         >
@@ -93,6 +97,11 @@ export function WarrantySection({
             alt={imageAlt}
           />
         </div>
+      </div>
+
+      {/* EXACT SAME BACKGROUND AS CARE SECTION */}
+      <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
+        <div className="h-full w-[720px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.025),transparent_70%)]" />
       </div>
     </section>
   );

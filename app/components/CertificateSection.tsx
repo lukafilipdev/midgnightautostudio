@@ -43,14 +43,18 @@ export function CertificateSection({
   return (
     <section
       ref={sectionRef}
-      className="studio-section relative py-20 md:py-28 px-6 border-t border-white/[0.06]"
+      className="relative overflow-hidden py-20 md:py-28 px-6 border-t border-white/[0.06]"
     >
+      {/* Vertical divider */}
       <div className="hidden md:block studio-divider" />
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+        {/* Text */}
         <div
           className={`studio-text transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-5"
+            isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 -translate-x-5"
           }`}
         >
           <p className="text-[11px] md:text-xs tracking-[0.35em] text-white/40 mb-4 uppercase">
@@ -78,9 +82,12 @@ export function CertificateSection({
           </div>
         </div>
 
+        {/* Image */}
         <div
           className={`studio-image-wrapper transition-all duration-700 ease-out ${
-            isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-5"
+            isVisible
+              ? "opacity-100 translate-x-0"
+              : "opacity-0 translate-x-5"
           }`}
           style={{ transitionDelay: "150ms" }}
         >
@@ -90,6 +97,11 @@ export function CertificateSection({
             alt={imageAlt}
           />
         </div>
+      </div>
+
+      {/* Same background as CareSection */}
+      <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
+        <div className="h-full w-[720px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.025),transparent_70%)]" />
       </div>
     </section>
   );
