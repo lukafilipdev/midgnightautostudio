@@ -20,6 +20,7 @@ import { CareSection } from "./components/CareSection";
 import { DeliverySection } from "./components/DeliverySection";
 import { CertificateSection } from "./components/CertificateSection";
 import { ClientVehiclesSection } from "./components/ClientVehiclesSection";
+import { WarrantySection } from "./components/WarrantySection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -1113,37 +1114,19 @@ export default function Home() {
         brands={["PORSCHE", "BMW M", "AUDI RS", "AMG"]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div data-reveal>
-            <p className="text-xs tracking-[0.35em] text-gray-500 mb-4">
-              {t("warrantyKicker")}
-            </p>
-            <h2 className="text-2xl md:text-3xl tracking-[0.3em] mb-6">
-              {t("warrantyTitle")}
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              {t("warrantyText")}
-            </p>
-            <div className="space-y-3 text-sm text-gray-300">
-              <p>• 5–10 year manufacturer warranty</p>
-              <p>• Self-healing top coat technology</p>
-              <p>• UV and stain resistance</p>
-              <p>• Paint preservation & resale value</p>
-            </div>
-          </div>
-          <div
-            className="rounded-3xl overflow-hidden border border-neutral-800"
-            data-reveal
-          >
-            <img
-              src={IMG.warranty}
-              className="w-full h-[420px] object-cover"
-              alt="Warranty"
-            />
-          </div>
-        </div>
-      </section>
+      <WarrantySection
+        kicker={t("warrantyKicker")}
+        title={t("warrantyTitle")}
+        description={t("warrantyText")}
+        imageSrc={IMG.warranty}
+        imageAlt="Warranty"
+        bullets={[
+          "5–10 year manufacturer warranty",
+          "Self-healing top coat technology",
+          "UV and stain resistance",
+          "Paint preservation & resale value",
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
         <div className="max-w-6xl mx-auto text-center">
