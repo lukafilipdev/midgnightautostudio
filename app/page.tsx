@@ -22,7 +22,7 @@ import { CertificateSection } from "./components/CertificateSection";
 import { ClientVehiclesSection } from "./components/ClientVehiclesSection";
 import { WarrantySection } from "./components/WarrantySection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
-import { Card, SectionTitle } from "./components/SectionPrimitives";
+import { BookingSection } from "./components/BookingSection";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -1132,85 +1132,30 @@ export default function Home() {
         ]}
       />
 
-      <section
-        id="booking"
-        className="py-20 md:py-32 px-6 border-t border-neutral-900"
-      >
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle
-            kicker={t("applyKicker")}
-            title={t("bookingTitle")}
-            subtitle={t("bookingSub")}
-          />
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            <form className="max-w-xl w-full mx-auto space-y-5" data-reveal>
-              <input
-                placeholder={t("vehiclePh")}
-                className="w-full p-4 bg-neutral-950 border border-neutral-800 rounded-xl"
-              />
-              <select
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                className="w-full p-4 bg-neutral-950 border border-neutral-800 rounded-xl"
-              >
-                <option value="">{t("opt0")}</option>
-                <option>{t("opt1")}</option>
-                <option>{t("opt2")}</option>
-                <option>{t("opt3")}</option>
-                <option>{t("opt4")}</option>
-                <option>{t("opt5")}</option>
-                <option>{t("opt6")}</option>
-              </select>
-              <input
-                placeholder={t("emailPh")}
-                className="w-full p-4 bg-neutral-950 border border-neutral-800 rounded-xl"
-              />
-              <button className="w-full py-4 border border-white rounded-full hover:bg-white hover:text-black transition">
-                {t("submit")}
-              </button>
-              <p className="text-gray-600 text-xs text-center">{t("response")}</p>
-            </form>
-
-            <div data-reveal className="max-w-xl w-full mx-auto">
-              <Card>
-                <p className="text-[10px] tracking-[0.35em] text-gray-500 mb-4">
-                  {t("quickContact")}
-                </p>
-                <p className="text-gray-400 text-sm mb-6">{t("qcSub")}</p>
-                <div className="space-y-3">
-                  <a
-                    href={`mailto:${CONTACT.email}`}
-                    className="flex items-center justify-between border border-neutral-800 rounded-2xl px-5 py-4 hover:border-white transition"
-                  >
-                    <span>{t("qc1")}</span>
-                    <span className="text-gray-400 text-sm">{CONTACT.email}</span>
-                  </a>
-                  <a
-                    href={CONTACT.instagram}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-between border border-neutral-800 rounded-2xl px-5 py-4 hover:border-white transition"
-                  >
-                    <span>{t("qc2")}</span>
-                    <span className="text-gray-400 text-sm">
-                      @midnightautostudio
-                    </span>
-                  </a>
-                  <a
-                    href={CONTACT.whatsapp}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-between border border-neutral-800 rounded-2xl px-5 py-4 hover:border-white transition"
-                  >
-                    <span>{t("qc3")}</span>
-                    <span className="text-gray-400 text-sm">+386 40 111 222</span>
-                  </a>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BookingSection
+        kicker={t("applyKicker")}
+        title={t("bookingTitle")}
+        subtitle={t("bookingSub")}
+        vehiclePlaceholder={t("vehiclePh")}
+        emailPlaceholder={t("emailPh")}
+        service={service}
+        onServiceChange={setService}
+        opt0={t("opt0")}
+        opt1={t("opt1")}
+        opt2={t("opt2")}
+        opt3={t("opt3")}
+        opt4={t("opt4")}
+        opt5={t("opt5")}
+        opt6={t("opt6")}
+        submitLabel={t("submit")}
+        responseNote={t("response")}
+        quickContact={t("quickContact")}
+        qcSub={t("qcSub")}
+        qc1={t("qc1")}
+        qc2={t("qc2")}
+        qc3={t("qc3")}
+        contact={CONTACT}
+      />
 
       <footer className="text-center py-10 text-gray-600 text-xs border-t border-neutral-900">
         <div className="max-w-7xl mx-auto px-6 space-y-3">
