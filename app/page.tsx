@@ -16,6 +16,7 @@ import { ServicesSection } from "./components/ServicesSection";
 import { PricingSection } from "./components/PricingSection";
 import { WindowTintSection } from "./components/WindowTintSection";
 import { GuaranteeSection } from "./components/GuaranteeSection";
+import { CareSection } from "./components/CareSection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -1007,72 +1008,40 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div data-reveal>
-            <p className="text-xs tracking-[0.35em] text-gray-500 mb-4">
-              {t("careKicker")}
-            </p>
-            <h2 className="text-2xl md:text-3xl tracking-[0.3em] mb-6">
-              {t("careTitle")}
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              {t("careText")}
-            </p>
-            <div className="space-y-3 text-sm text-gray-300">
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Ročno pranje vozila"
-                  : lang === "de"
-                    ? "Handwäsche empfohlen"
-                    : "Hand washing recommended"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Brez agresivnih kemikalij"
-                  : lang === "de"
-                    ? "Keine aggressiven Chemikalien"
-                    : "Avoid aggressive chemicals"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Varno sušenje z mikrovlakni"
-                  : lang === "de"
-                    ? "Trocknen mit Mikrofasertuch"
-                    : "Safe microfiber drying"}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Redno vzdrževanje za maksimalen izgled"
-                  : lang === "de"
-                    ? "Regelmäßige Pflege für bestes Ergebnis"
-                    : "Regular maintenance for best appearance"}
-              </p>
-            </div>
-            <p className="text-gray-500 text-xs mt-6">
-              {lang === "sl"
-                ? "Podrobna navodila so vključena v garancijski knjižici, ki jo prejme vsaka stranka po zaključku projekta."
-                : lang === "de"
-                  ? "Detaillierte Pflegehinweise befinden sich im Garantieheft, das jeder Kunde nach Abschluss erhält."
-                  : "Detailed instructions are included in the warranty booklet delivered with every completed project."}
-            </p>
-          </div>
-          <div
-            className="rounded-3xl overflow-hidden border border-neutral-800"
-            data-reveal
-          >
-            <img
-              src={IMG.care}
-              className="w-full h-[420px] object-cover"
-              alt="Care"
-            />
-          </div>
-        </div>
-      </section>
+      <CareSection
+        kicker={t("careKicker")}
+        title={t("careTitle")}
+        description={t("careText")}
+        bookletNote={
+          lang === "sl"
+            ? "Podrobna navodila so vključena v garancijski knjižici, ki jo prejme vsaka stranka po zaključku projekta."
+            : lang === "de"
+              ? "Detaillierte Pflegehinweise befinden sich im Garantieheft, das jeder Kunde nach Abschluss erhält."
+              : "Detailed instructions are included in the warranty booklet delivered with every completed project."
+        }
+        bullets={[
+          lang === "sl"
+            ? "Ročno pranje vozila"
+            : lang === "de"
+              ? "Handwäsche empfohlen"
+              : "Hand washing recommended",
+          lang === "sl"
+            ? "Brez agresivnih kemikalij"
+            : lang === "de"
+              ? "Keine aggressiven Chemikalien"
+              : "Avoid aggressive chemicals",
+          lang === "sl"
+            ? "Varno sušenje z mikrovlakni"
+            : lang === "de"
+              ? "Trocknen mit Mikrofasertuch"
+              : "Safe microfiber drying",
+          lang === "sl"
+            ? "Redno vzdrževanje za maksimalen izgled"
+            : lang === "de"
+              ? "Regelmäßige Pflege für bestes Ergebnis"
+              : "Regular maintenance for best appearance",
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
