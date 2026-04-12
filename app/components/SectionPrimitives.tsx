@@ -4,13 +4,19 @@ export function SectionTitle({
   kicker,
   title,
   subtitle,
+  reveal = true,
 }: {
   kicker?: string;
   title: string;
   subtitle?: string;
+  /** When false, skip scroll-reveal (opacity stays visible). */
+  reveal?: boolean;
 }) {
   return (
-    <div className="text-center mb-12 md:mb-16" data-reveal>
+    <div
+      className="text-center mb-12 md:mb-16"
+      {...(reveal ? { "data-reveal": true } : {})}
+    >
       {kicker ? (
         <p className="text-[10px] md:text-xs tracking-[0.35em] text-gray-500 mb-4">
           {kicker}

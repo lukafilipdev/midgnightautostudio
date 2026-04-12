@@ -12,6 +12,8 @@ interface ProtectionDemoProps {
   title: string;
   subtitle: string;
   benefits: BenefitCard[];
+  beforeImage?: string;
+  afterImage?: string;
 }
 
 export function ProtectionDemo({
@@ -19,6 +21,8 @@ export function ProtectionDemo({
   title,
   subtitle,
   benefits,
+  beforeImage = "/before1.png",
+  afterImage = "/after1.png",
 }: ProtectionDemoProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,7 +123,7 @@ export function ProtectionDemo({
             {/* Base image = protected (right side remains protected) */}
             <div className="absolute inset-0">
               <img
-                src="/after1.png"
+                src={afterImage}
                 alt="Zaščiten lak"
                 className="h-full w-full object-cover pointer-events-none select-none"
                 draggable={false}
@@ -136,7 +140,7 @@ export function ProtectionDemo({
                 style={{ width: containerRef.current?.offsetWidth || "100%" }}
               >
                 <img
-                  src="/before1.png"
+                  src={beforeImage}
                   alt="Lak brez PPF"
                   className="h-full w-full object-cover pointer-events-none select-none"
                   draggable={false}

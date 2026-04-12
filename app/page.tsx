@@ -15,6 +15,7 @@ import { ProtectionDemo } from "./components/ProtectionDemo";
 import { ServicesSection } from "./components/ServicesSection";
 import { PricingSection } from "./components/PricingSection";
 import { WindowTintSection } from "./components/WindowTintSection";
+import { GuaranteeSection } from "./components/GuaranteeSection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -36,10 +37,6 @@ const IMG = {
     "https://images.unsplash.com/photo-1517142089942-ba376ce32a0b?q=80&w=1800&auto=format&fit=crop",
   cfgMatte:
     "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?q=80&w=1800&auto=format&fit=crop",
-  tintBefore:
-    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1800&auto=format&fit=crop",
-  tintAfter:
-    "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1800&auto=format&fit=crop",
   studio:
     "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1600&auto=format&fit=crop",
   warranty:
@@ -576,10 +573,6 @@ const I18N: Record<Lang, Dict> = {
 
 function useRevealOnScroll() {
   useEffect(() => {
-    const els = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-reveal]")
-    );
-    if (!els.length) return;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -591,8 +584,29 @@ function useRevealOnScroll() {
       },
       { threshold: 0.12, rootMargin: "0px 0px -10% 0px" }
     );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    const scan = () => {
+      for (const el of document.querySelectorAll<HTMLElement>("[data-reveal]")) {
+        if (el.classList.contains("reveal-in")) continue;
+        io.observe(el);
+      }
+    };
+
+    scan();
+    const raf = requestAnimationFrame(scan);
+    const t0 = window.setTimeout(scan, 0);
+    const t1 = window.setTimeout(scan, 100);
+
+    const mo = new MutationObserver(scan);
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(t0);
+      window.clearTimeout(t1);
+      mo.disconnect();
+      io.disconnect();
+    };
   }, []);
 }
 
@@ -818,8 +832,6 @@ export default function Home() {
         kicker={t("demoKicker")}
         title={t("demoTitle")}
         subtitle={t("demoSub")}
-        beforeImage={IMG.tintBefore}
-        afterImage={IMG.tintAfter}
         benefits={[
           {
             label: "IMPACT",
@@ -888,8 +900,6 @@ export default function Home() {
         kicker={t("comfortKicker")}
         title={t("tintTitle")}
         subtitle={t("tintSub")}
-        beforeImage={IMG.tintBefore}
-        afterImage={IMG.tintAfter}
         features={[
           {
             tag: t("signature"),
@@ -909,123 +919,93 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
-        <div className="max-w-6xl mx-auto">
-          <SectionTitle
-            kicker={t("guaranteeKicker")}
-            title={t("guaranteeTitle")}
-            subtitle={t("guaranteeSub")}
-          />
-          <div className="grid md:grid-cols-3 gap-8" data-reveal>
-            {[
-              [
-                "01",
-                lang === "sl"
-                  ? "Popravek"
-                  : lang === "de"
-                    ? "Korrektur"
-                    : "Correction",
-                lang === "sl"
-                  ? "Če opazite instalacijsko napako, jo brezplačno popravimo."
-                  : lang === "de"
-                    ? "Installationsfehler werden kostenlos korrigiert."
-                    : "Any installation defect will be corrected free of charge.",
-              ],
-              [
-                "02",
-                lang === "sl"
-                  ? "Ponovna montaža"
-                  : lang === "de"
-                    ? "Neuinstallation"
-                    : "Reinstallation",
-                lang === "sl"
-                  ? "Če popravek ni dovolj, panel ponovno montiramo."
-                  : lang === "de"
-                    ? "Wenn nötig wird das Panel erneut installiert."
-                    : "If needed the panel will be reinstalled.",
-              ],
-              [
-                "03",
-                lang === "sl"
-                  ? "Refund"
-                  : lang === "de"
-                    ? "Rückerstattung"
-                    : "Refund",
-                lang === "sl"
-                  ? "Če težave ni mogoče odpraviti, omogočamo delni ali polni refund."
-                  : lang === "de"
-                    ? "Wenn das Problem nicht lösbar ist, bieten wir eine teilweise oder vollständige Rückerstattung."
-                    : "If the issue cannot be resolved, we offer a partial or full refund.",
-              ],
-            ].map(([n, tt, d], i) => (
-              <Card key={i}>
-                <p className="text-xs tracking-[0.35em] text-gray-500 mb-3">
-                  {n}
-                </p>
-                <h3 className="text-lg mb-3">{tt}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{d}</p>
-              </Card>
-            ))}
-          </div>
-          <p className="text-center text-gray-500 text-xs mt-10 max-w-2xl mx-auto">
-            {lang === "sl"
-              ? "Garancija velja za instalacijske napake in mora biti prijavljena v 7 dneh po prevzemu vozila."
-              : lang === "de"
-                ? "Die Garantie gilt für Installationsfehler und muss innerhalb von 7 Tagen gemeldet werden."
-                : "Guarantee applies to installation defects and must be reported within 7 days after delivery."}
-          </p>
-          <div
-            className="mt-14 border-t border-neutral-800 pt-10 max-w-3xl mx-auto"
-            data-reveal
-          >
-            <h3 className="text-sm tracking-[0.25em] text-gray-400 mb-6 text-center">
-              {t("notCovered")}
-            </h3>
-            <div className="space-y-3 text-sm text-gray-400">
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Poškodbe po prevzemu vozila (kamenčki, praske, nesreče)."
-                  : lang === "de"
-                    ? "Schäden nach der Fahrzeugübergabe (Steinschläge, Kratzer, Unfälle)."
-                    : "Damage after delivery (stone chips, scratches, accidents)."}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Nepravilno vzdrževanje ali uporaba agresivnih čistil."
-                  : lang === "de"
-                    ? "Falsche Pflege oder aggressive Reinigungsmittel."
-                    : "Improper maintenance or use of aggressive chemicals."}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Avtopralnice z grobimi krtačami ali mehanske poškodbe."
-                  : lang === "de"
-                    ? "Waschanlagen mit harten Bürsten oder mechanische Schäden."
-                    : "Automatic car washes with harsh brushes or mechanical damage."}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Poškodbe zaradi dirkališke vožnje ali ekstremne uporabe."
-                  : lang === "de"
-                    ? "Schäden durch Rennstreckennutzung oder extreme Belastung."
-                    : "Damage caused by track use or extreme driving conditions."}
-              </p>
-              <p>
-                •{" "}
-                {lang === "sl"
-                  ? "Posegi tretjih oseb na foliji ali lakiranju vozila."
-                  : lang === "de"
-                    ? "Eingriffe durch Dritte an Folie oder Lack."
-                    : "Work performed by third parties on the film or paint."}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GuaranteeSection
+        kicker={t("guaranteeKicker")}
+        title={t("guaranteeTitle")}
+        subtitle={t("guaranteeSub")}
+        footnote={
+          lang === "sl"
+            ? "Garancija velja za instalacijske napake in mora biti prijavljena v 7 dneh po prevzemu vozila."
+            : lang === "de"
+              ? "Die Garantie gilt für Installationsfehler und muss innerhalb von 7 Tagen gemeldet werden."
+              : "Guarantee applies to installation defects and must be reported within 7 days after delivery."
+        }
+        notCoveredTitle={t("notCovered")}
+        cards={[
+          {
+            step: "01",
+            title:
+              lang === "sl"
+                ? "Popravek"
+                : lang === "de"
+                  ? "Korrektur"
+                  : "Correction",
+            description:
+              lang === "sl"
+                ? "Če opazite instalacijsko napako, jo brezplačno popravimo."
+                : lang === "de"
+                  ? "Installationsfehler werden kostenlos korrigiert."
+                  : "Any installation defect will be corrected free of charge.",
+          },
+          {
+            step: "02",
+            title:
+              lang === "sl"
+                ? "Ponovna montaža"
+                : lang === "de"
+                  ? "Neuinstallation"
+                  : "Reinstallation",
+            description:
+              lang === "sl"
+                ? "Če popravek ni dovolj, panel ponovno montiramo."
+                : lang === "de"
+                  ? "Wenn nötig wird das Panel erneut installiert."
+                  : "If needed the panel will be reinstalled.",
+          },
+          {
+            step: "03",
+            title:
+              lang === "sl"
+                ? "Refund"
+                : lang === "de"
+                  ? "Rückerstattung"
+                  : "Refund",
+            description:
+              lang === "sl"
+                ? "Če težave ni mogoče odpraviti, omogočamo delni ali polni refund."
+                : lang === "de"
+                  ? "Wenn das Problem nicht lösbar ist, bieten wir eine teilweise oder vollständige Rückerstattung."
+                  : "If the issue cannot be resolved, we offer a partial or full refund.",
+          },
+        ]}
+        notCoveredItems={[
+          lang === "sl"
+            ? "Poškodbe po prevzemu vozila (kamenčki, praske, nesreče)."
+            : lang === "de"
+              ? "Schäden nach der Fahrzeugübergabe (Steinschläge, Kratzer, Unfälle)."
+              : "Damage after delivery (stone chips, scratches, accidents).",
+          lang === "sl"
+            ? "Nepravilno vzdrževanje ali uporaba agresivnih čistil."
+            : lang === "de"
+              ? "Falsche Pflege oder aggressive Reinigungsmittel."
+              : "Improper maintenance or use of aggressive chemicals.",
+          lang === "sl"
+            ? "Avtopralnice z grobimi krtačami ali mehanske poškodbe."
+            : lang === "de"
+              ? "Waschanlagen mit harten Bürsten oder mechanische Schäden."
+              : "Automatic car washes with harsh brushes or mechanical damage.",
+          lang === "sl"
+            ? "Poškodbe zaradi dirkališke vožnje ali ekstremne uporabe."
+            : lang === "de"
+              ? "Schäden durch Rennstreckennutzung oder extreme Belastung."
+              : "Damage caused by track use or extreme driving conditions.",
+          lang === "sl"
+            ? "Posegi tretjih oseb na foliji ali lakiranju vozila."
+            : lang === "de"
+              ? "Eingriffe durch Dritte an Folie oder Lack."
+              : "Work performed by third parties on the film or paint.",
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
