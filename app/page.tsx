@@ -19,6 +19,7 @@ import { GuaranteeSection } from "./components/GuaranteeSection";
 import { CareSection } from "./components/CareSection";
 import { DeliverySection } from "./components/DeliverySection";
 import { CertificateSection } from "./components/CertificateSection";
+import { ClientVehiclesSection } from "./components/ClientVehiclesSection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -1105,25 +1106,12 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
-        <div className="max-w-6xl mx-auto text-center">
-          <SectionTitle
-            kicker={t("clientVehiclesKicker")}
-            title={t("clientVehiclesTitle")}
-            subtitle={t("clientVehiclesSub")}
-          />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10" data-reveal>
-            {["PORSCHE", "BMW M", "AUDI RS", "AMG"].map((brand, i) => (
-              <div
-                key={i}
-                className="border border-neutral-800 rounded-3xl p-10 bg-black text-lg tracking-[0.2em]"
-              >
-                {brand}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ClientVehiclesSection
+        kicker={t("clientVehiclesKicker")}
+        title={t("clientVehiclesTitle")}
+        subtitle={t("clientVehiclesSub")}
+        brands={["PORSCHE", "BMW M", "AUDI RS", "AMG"]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
