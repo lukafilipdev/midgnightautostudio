@@ -21,6 +21,7 @@ import { DeliverySection } from "./components/DeliverySection";
 import { CertificateSection } from "./components/CertificateSection";
 import { ClientVehiclesSection } from "./components/ClientVehiclesSection";
 import { WarrantySection } from "./components/WarrantySection";
+import { TestimonialsSection } from "./components/TestimonialsSection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -46,8 +47,6 @@ const IMG = {
     "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1600&auto=format&fit=crop",
   warranty:
     "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1600&auto=format&fit=crop",
-  track:
-    "https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=1800&auto=format&fit=crop",
   care: "https://images.unsplash.com/photo-1607863680198-23d4b2565df0?q=80&w=1600&auto=format&fit=crop",
   delivery:
     "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1600&auto=format&fit=crop",
@@ -198,11 +197,6 @@ const I18N: Record<Lang, Dict> = {
     warrantyTitle: "DOLGOROČNA ZAŠČITA",
     warrantyText:
       "Uporabljamo premium zaščitne folije z dolgoletno garancijo.",
-    trackKicker: "PERFORMANCE",
-    trackTitle: "SEEN ON TRACK",
-    trackSub: "Zaščita vozil, ki se vozijo tudi na dirkališču.",
-    trackText:
-      "Track vožnja pomeni večjo obrabo. PPF zaščita preprečuje poškodbe laka pri visokih hitrostih.",
     applyKicker: "APPLY",
     bookingTitle: "ZASEBNI POSVET",
     bookingSub:
@@ -370,11 +364,6 @@ const I18N: Record<Lang, Dict> = {
     warrantyTitle: "LONG-TERM PROTECTION",
     warrantyText:
       "We install premium protection films backed by long manufacturer warranties.",
-    trackKicker: "PERFORMANCE",
-    trackTitle: "SEEN ON TRACK",
-    trackSub: "Protection built for vehicles that also see track use.",
-    trackText:
-      "Track driving creates extreme wear. PPF protects paint from debris at high speeds.",
     applyKicker: "APPLY",
     bookingTitle: "PRIVATE CONSULTATION",
     bookingSub:
@@ -541,12 +530,6 @@ const I18N: Record<Lang, Dict> = {
     warrantyTitle: "LANGFRISTIGER SCHUTZ",
     warrantyText:
       "Wir verwenden hochwertige Schutzfolien mit mehrjähriger Garantie.",
-    trackKicker: "PERFORMANCE",
-    trackTitle: "AUF DER RENNSTRECKE",
-    trackSub:
-      "Schutz für Fahrzeuge, die auch auf der Rennstrecke gefahren werden.",
-    trackText:
-      "Track-Fahrten bedeuten höhere Belastung – PPF schützt den Lack bei hohen Geschwindigkeiten.",
     applyKicker: "APPLY",
     bookingTitle: "PRIVATE BERATUNG",
     bookingSub:
@@ -1128,58 +1111,26 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-black">
-        <div className="max-w-6xl mx-auto text-center">
-          <SectionTitle
-            kicker={t("trackKicker")}
-            title={t("trackTitle")}
-            subtitle={t("trackSub")}
-          />
-          <div className="max-w-4xl mx-auto" data-reveal>
-            <img
-              src={IMG.track}
-              className="rounded-3xl border border-neutral-800"
-              alt="Track"
-            />
-            <p className="text-gray-400 text-sm mt-6 leading-relaxed">
-              {t("trackText")}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 md:py-28 px-6 border-t border-neutral-900">
-        <div className="max-w-6xl mx-auto text-center">
-          <SectionTitle
-            kicker={t("testimonialsKicker")}
-            title={t("testimonialsTitle")}
-            subtitle={t("testimonialsSub")}
-          />
-          <div className="grid md:grid-cols-3 gap-8" data-reveal>
-            {[
-              [
-                "Porsche 911 Owner",
-                "Installation quality and attention to detail were on another level.",
-              ],
-              [
-                "BMW M4 Owner",
-                "The design preview made the decision incredibly easy.",
-              ],
-              [
-                "Audi RS6 Owner",
-                "This is not a wrap shop. It's a true automotive studio.",
-              ],
-            ].map(([name, quote], i) => (
-              <Card key={i}>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                  &quot;{quote}&quot;
-                </p>
-                <p className="text-xs tracking-[0.25em] text-gray-500">{name}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection
+        kicker={t("testimonialsKicker")}
+        title={t("testimonialsTitle")}
+        subtitle={t("testimonialsSub")}
+        items={[
+          {
+            name: "Porsche 911 Owner",
+            quote:
+              "Installation quality and attention to detail were on another level.",
+          },
+          {
+            name: "BMW M4 Owner",
+            quote: "The design preview made the decision incredibly easy.",
+          },
+          {
+            name: "Audi RS6 Owner",
+            quote: "This is not a wrap shop. It's a true automotive studio.",
+          },
+        ]}
+      />
 
       <section
         id="booking"
