@@ -198,28 +198,30 @@ export function WindowTintSection({
           }`}
           style={{ transitionDelay: "260ms" }}
         >
-          <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          <div className="grid gap-8 md:grid-cols-3 md:gap-10 justify-items-center">
             {features.map((feature, i) => (
               <div
                 key={i}
-                className={`text-center transition-all duration-700 ease-out md:text-left ${
+                className={`text-center transition-all duration-700 ease-out ${
                   isVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-5 opacity-0"
                 }`}
                 style={{ transitionDelay: `${320 + i * 80}ms` }}
               >
-                <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-white/40 md:text-xs">
-                  {feature.tag}
-                </p>
+                <div className="max-w-[260px]">
+                  <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-white/40 md:text-xs">
+                    {feature.tag}
+                  </p>
 
-                <p className="mb-2 text-base text-white md:text-lg">
-                  {feature.title}
-                </p>
+                  <p className="mb-2 text-base text-white md:text-lg">
+                    {feature.title}
+                  </p>
 
-                <p className="mx-auto max-w-[280px] text-sm leading-[1.6] text-white/[0.78] md:mx-0">
-                  {feature.description}
-                </p>
+                  <p className="text-sm leading-[1.6] text-white/[0.78]">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

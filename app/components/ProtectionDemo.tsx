@@ -90,6 +90,7 @@ export function ProtectionDemo({
       className="border-t border-white/[0.06] bg-black px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-[1100px]">
+        {/* Header */}
         <div
           className={`mb-12 text-center transition-all duration-700 ease-out md:mb-14 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
@@ -108,6 +109,7 @@ export function ProtectionDemo({
           </p>
         </div>
 
+        {/* Slider */}
         <div
           className={`transition-all duration-700 ease-out ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
@@ -120,7 +122,7 @@ export function ProtectionDemo({
             className="group relative mx-auto aspect-[16/9] max-w-5xl cursor-ew-resize overflow-hidden rounded-[28px] border border-white/[0.08] bg-black shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
             style={{ touchAction: "none" }}
           >
-            {/* Base image = protected (right side remains protected) */}
+            {/* After */}
             <div className="absolute inset-0">
               <img
                 src={afterImage}
@@ -130,7 +132,7 @@ export function ProtectionDemo({
               />
             </div>
 
-            {/* Revealed overlay image = unprotected (left side reveals Brez PPF) */}
+            {/* Before */}
             <div
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${slider}%` }}
@@ -184,33 +186,37 @@ export function ProtectionDemo({
           </p>
         </div>
 
+        {/* Benefits (FIXED ALIGNMENT) */}
         <div
           className={`mt-12 transition-all duration-700 ease-out md:mt-14 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
           style={{ transitionDelay: "260ms" }}
         >
-          <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          <div className="grid gap-8 md:grid-cols-3 md:gap-10 justify-items-center">
             {benefits.map((benefit, i) => (
               <div
                 key={i}
-                className={`text-center transition-all duration-700 ease-out md:text-left ${
+                className={`text-center transition-all duration-700 ease-out ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
                 }`}
                 style={{ transitionDelay: `${320 + i * 80}ms` }}
               >
-                <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-white/40 md:text-xs">
-                  {benefit.label}
-                </p>
+                <div className="max-w-[260px]">
+                  <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-white/40 md:text-xs">
+                    {benefit.label}
+                  </p>
 
-                <p className="mx-auto max-w-[280px] text-sm leading-[1.6] text-white/[0.78] md:mx-0">
-                  {benefit.text}
-                </p>
+                  <p className="text-sm leading-[1.6] text-white/[0.78]">
+                    {benefit.text}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Divider */}
         <div
           className={`mx-auto mt-14 h-px w-full max-w-[800px] transition-opacity duration-700 md:mt-16 ${
             isVisible ? "opacity-100" : "opacity-0"

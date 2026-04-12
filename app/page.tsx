@@ -1158,7 +1158,7 @@ export default function Home() {
         contact={CONTACT}
       />
 
-      <Footer tagline={t("footer")} contact={CONTACT} />
+      <Footer tagline={t("footer")} />
 
       {showStickyCta ? (
         <div className="fixed bottom-4 left-0 right-0 z-[80] px-4 md:hidden pointer-events-none">
