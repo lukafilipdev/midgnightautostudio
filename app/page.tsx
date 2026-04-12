@@ -14,6 +14,7 @@ import { ConfiguratorSection } from "./components/ConfiguratorSection";
 import { ProtectionDemo } from "./components/ProtectionDemo";
 import { ServicesSection } from "./components/ServicesSection";
 import { PricingSection } from "./components/PricingSection";
+import { WindowTintSection } from "./components/WindowTintSection";
 import { Card, SectionTitle } from "./components/SectionPrimitives";
 
 const CONTACT = {
@@ -599,7 +600,6 @@ function useRevealOnScroll() {
 export default function Home() {
   const [lang, setLang] = useState<Lang>("sl");
   const [service, setService] = useState("");
-  const [tintSlider, setTintSlider] = useState(52);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -884,49 +884,30 @@ export default function Home() {
         ]}
       />
 
-      <section className="py-20 md:py-32 px-6 border-t border-neutral-900">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle
-            kicker={t("comfortKicker")}
-            title={t("tintTitle")}
-            subtitle={t("tintSub")}
-          />
-          <div className="max-w-5xl mx-auto" data-reveal>
-            <div className="relative rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-950">
-              <img src={IMG.tintBefore} className="w-full" alt="Before tint" />
-              <div
-                className="absolute top-0 left-0 h-full overflow-hidden"
-                style={{ width: `${tintSlider}%` }}
-              >
-                <img src={IMG.tintAfter} className="w-full" alt="After tint" />
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={tintSlider}
-                onChange={(e) => setTintSlider(Number(e.target.value))}
-                className="absolute bottom-5 left-1/2 -translate-x-1/2 w-3/4"
-              />
-            </div>
-            <div className="mt-10 grid md:grid-cols-3 gap-6">
-              {[
-                [t("signature"), t("tint1"), t("tint1d")],
-                [t("perf"), t("tint2"), t("tint2d")],
-                [t("track"), t("tint3"), t("tint3d")],
-              ].map(([tag, tt, d], i) => (
-                <Card key={i}>
-                  <p className="text-[10px] tracking-[0.35em] text-gray-500 mb-3">
-                    {tag}
-                  </p>
-                  <p className="text-lg mb-2">{tt}</p>
-                  <p className="text-gray-400 text-sm">{d}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <WindowTintSection
+        kicker={t("comfortKicker")}
+        title={t("tintTitle")}
+        subtitle={t("tintSub")}
+        beforeImage={IMG.tintBefore}
+        afterImage={IMG.tintAfter}
+        features={[
+          {
+            tag: t("signature"),
+            title: t("tint1"),
+            description: t("tint1d"),
+          },
+          {
+            tag: t("perf"),
+            title: t("tint2"),
+            description: t("tint2d"),
+          },
+          {
+            tag: t("track"),
+            title: t("tint3"),
+            description: t("tint3d"),
+          },
+        ]}
+      />
 
       <section className="py-20 md:py-28 px-6 border-t border-neutral-900 bg-neutral-950">
         <div className="max-w-6xl mx-auto">
