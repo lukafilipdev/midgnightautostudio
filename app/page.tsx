@@ -218,7 +218,6 @@ const I18N: Record<Lang, Dict> = {
     qc2: "Instagram",
     qc3: "WhatsApp",
     qcSub: "Če želiš hiter odgovor, nas kontaktiraj direktno.",
-    sticky: "Rezerviraj zasebni posvet",
     footer: "Midnight Auto Studio · Premium zaščita vozil",
     galleryLabel: "GALERIJA",
     prev: "Nazaj",
@@ -385,7 +384,6 @@ const I18N: Record<Lang, Dict> = {
     qc2: "Instagram",
     qc3: "WhatsApp",
     qcSub: "For a faster response, contact us directly.",
-    sticky: "Book Private Consultation",
     footer: "Midnight Auto Studio · Premium Automotive Protection",
     galleryLabel: "GALLERY",
     prev: "Prev",
@@ -551,7 +549,6 @@ const I18N: Record<Lang, Dict> = {
     qc2: "Instagram",
     qc3: "WhatsApp",
     qcSub: "Für eine schnellere Antwort kontaktieren Sie uns direkt.",
-    sticky: "Private Beratung buchen",
     footer: "Midnight Auto Studio · Premium Fahrzeugschutz",
     galleryLabel: "GALERIE",
     prev: "Zurück",
@@ -612,7 +609,6 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const [showStickyCta, setShowStickyCta] = useState(true);
 
   useRevealOnScroll();
 
@@ -641,21 +637,6 @@ export default function Home() {
     }
     meta.content = description;
   }, [lang]);
-
-  useEffect(() => {
-    const booking = document.getElementById("booking");
-    if (!booking) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.target === booking) setShowStickyCta(!e.isIntersecting);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    io.observe(booking);
-    return () => io.disconnect();
-  }, []);
 
   const projects = useMemo(
     () => [
@@ -1159,40 +1140,6 @@ export default function Home() {
       />
 
       <Footer tagline={t("footer")} />
-
-      {showStickyCta ? (
-        <div className="fixed bottom-4 left-0 right-0 z-[80] px-4 md:hidden pointer-events-none">
-          <a
-            href="#booking"
-            className="block w-full text-center bg-white text-black py-4 rounded-full font-medium pointer-events-auto shadow-2xl"
-          >
-            {t("sticky")}
-          </a>
-          <div className="mt-3 flex items-center justify-center gap-2 pointer-events-auto">
-            {(
-              [
-                ["sl", "SI"],
-                ["en", "EN"],
-                ["de", "DE"],
-              ] as const
-            ).map(([k, label]) => (
-              <button
-                key={k}
-                type="button"
-                onClick={() => setLang(k)}
-                className={
-                  "px-3 py-2 rounded-full text-[10px] tracking-[0.25em] border transition " +
-                  (lang === k
-                    ? "bg-white text-black border-white"
-                    : "border-neutral-800 text-gray-200")
-                }
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
     </main>
   );
 }
