@@ -13,25 +13,28 @@ interface HeroProps {
 
 export function Hero({ lang, requestText, viewBuildsText, limitedText }: HeroProps) {
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center px-6 pt-24 hero-bg overflow-hidden">
-      {/* Noise texture overlay */}
-      <div className="hero-noise" />
+    <section className="relative min-h-[100svh] flex items-center justify-center px-6 pt-24 overflow-hidden bg-black">
+      
+      {/* Soft center glow (luxury lighting) */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.06),transparent_60%)]" />
 
-      {/* Cursor light effect */}
-      <div
-        className="cursor-light"
-        style={{
-          background: `radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.04), transparent 40%)`,
-        }}
-      />
+      {/* Top fade (cinematic depth) */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7),transparent_30%)]" />
+
+      {/* Bottom vignette */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.6),transparent_35%)]" />
+
+      {/* Subtle noise */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.025] hero-noise" />
 
       <div className="relative z-20 max-w-4xl text-center">
-        {/* Logo with glow */}
+        
+        {/* Logo */}
         <div className="flex justify-center mb-6 hero-animate-1 logo-glow">
           <Logo className="h-64 md:h-80 lg:h-[420px] w-auto" />
         </div>
 
-        {/* Main headline with gradient text */}
+        {/* Headline */}
         <div className="max-w-2xl mx-auto space-y-4 hero-animate-2">
           <p className="text-white/90 text-lg md:text-xl lg:text-2xl font-light tracking-wide leading-relaxed">
             {lang === "sl"
@@ -41,7 +44,7 @@ export function Hero({ lang, requestText, viewBuildsText, limitedText }: HeroPro
                 : "Boutique automotive protection atelier for"}
             <span className="font-semibold gradient-text"> BMW M</span>,
             <span className="font-semibold gradient-text"> Audi RS</span>{" "}
-            {lang === "sl" ? "in" : lang === "de" ? "&" : "&"}
+            {lang === "sl" ? "in" : "&"}
             <span className="font-semibold gradient-text"> Porsche</span>.
           </p>
         </div>
@@ -71,7 +74,7 @@ export function Hero({ lang, requestText, viewBuildsText, limitedText }: HeroPro
           </a>
         </div>
 
-        {/* Divider with limited text */}
+        {/* Divider */}
         <div className="mt-12 flex items-center justify-center gap-4 hero-animate-5">
           <div className="w-16 h-px bg-gradient-to-r from-transparent to-white/30" />
           <p className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-medium">
@@ -86,15 +89,18 @@ export function Hero({ lang, requestText, viewBuildsText, limitedText }: HeroPro
             <span className="text-white/70">✓</span> BMW M / Audi RS{" "}
             {lang === "sl" ? "specialisti" : lang === "de" ? "Spezialisten" : "specialists"}
           </span>
+
           <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
             <span className="text-white/70">✓</span> Premium{" "}
             {lang === "sl" ? "materiali" : lang === "de" ? "Materialien" : "materials"}
           </span>
+
           <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
             <span className="text-white/70">✓</span>{" "}
             {lang === "sl" ? "Brez kompromisov" : lang === "de" ? "Keine Kompromisse" : "No compromises"}
           </span>
         </div>
+
       </div>
     </section>
   );

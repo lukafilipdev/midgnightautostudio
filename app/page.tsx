@@ -27,8 +27,8 @@ import { Footer } from "./components/Footer";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
-  instagram: "https://instagram.com/midnightautostudio",
-  whatsapp: "https://wa.me/38640111222",
+  instagram: "https://instagram.com/midnight_autostudio.eu",
+  whatsapp: "https://wa.me/38630358407",
 };
 
 const HERO_VIDEO =
