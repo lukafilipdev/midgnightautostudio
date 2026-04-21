@@ -189,7 +189,7 @@ export function BookingSection({
                 >
                   <span className="text-sm text-white/[0.78]">{qc2}</span>
                   <span className="text-sm text-white/40 text-right">
-                    @midnight_autostudio.eu
+                    @midnightautostudio.eu
                   </span>
                 </a>
 
@@ -201,7 +201,7 @@ export function BookingSection({
                 >
                   <span className="text-sm text-white/[0.78]">{qc3}</span>
                   <span className="text-sm text-white/40 text-right">
-                    +386 30 358 407
+                    +386 40 813 855
                   </span>
                 </a>
               </div>

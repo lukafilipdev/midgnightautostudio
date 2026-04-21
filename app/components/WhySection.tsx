@@ -13,9 +13,27 @@ interface WhySectionProps {
   title: string;
   subtitle: string;
   items: [WhyItem, WhyItem, WhyItem];
+  brands?: string[];
+  brandsLabel?: string;
 }
 
-export function WhySection({ kicker, title, subtitle, items }: WhySectionProps) {
+const getVehicleLogo = (name: string) => {
+  const n = name.toLowerCase().trim();
+  if (n.includes("porsche")) return "/porsche.png";
+  if (n.includes("bmw")) return "/bmw.png";
+  if (n.includes("audi")) return "/audi.png";
+  if (n.includes("mercedes") || n.includes("amg")) return "/amg.png";
+  return null;
+};
+
+export function WhySection({
+  kicker,
+  title,
+  subtitle,
+  items,
+  brands,
+  brandsLabel,
+}: WhySectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,6 +54,8 @@ export function WhySection({ kicker, title, subtitle, items }: WhySectionProps) 
 
     return () => observer.disconnect();
   }, []);
+
+  const hasBrands = Array.isArray(brands) && brands.length > 0;
 
   return (
     <section
@@ -90,6 +110,49 @@ export function WhySection({ kicker, title, subtitle, items }: WhySectionProps) 
             </div>
           ))}
         </div>
+
+        {/* Client vehicles — specialisation row */}
+        {hasBrands && (
+          <div
+            className={`mt-16 md:mt-20 transition-all duration-700 ease-out ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+            style={{ transitionDelay: "560ms" }}
+          >
+            <div className="mx-auto mb-8 h-px w-full max-w-[700px] bg-white/[0.06]" />
+
+            {brandsLabel && (
+              <p className="mb-7 text-center text-[10px] uppercase tracking-[0.35em] text-white/35 md:text-[11px]">
+                {brandsLabel}
+              </p>
+            )}
+
+            <div className="relative mx-auto max-w-[900px]">
+              <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+                {brands!.map((brand, i) => {
+                  const logoSrc = getVehicleLogo(brand);
+                  return (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center justify-center gap-2.5 opacity-70 transition-opacity duration-300 hover:opacity-100"
+                    >
+                      {logoSrc ? (
+                        <img
+                          src={logoSrc}
+                          alt={brand}
+                          className="h-9 w-auto max-w-[110px] object-contain md:h-11"
+                        />
+                      ) : null}
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 md:text-xs">
+                        {brand}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

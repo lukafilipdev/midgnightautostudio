@@ -15,20 +15,15 @@ import { ProtectionDemo } from "./components/ProtectionDemo";
 import { ServicesSection } from "./components/ServicesSection";
 import { PricingSection } from "./components/PricingSection";
 import { WindowTintSection } from "./components/WindowTintSection";
-import { GuaranteeSection } from "./components/GuaranteeSection";
-import { CareSection } from "./components/CareSection";
-import { DeliverySection } from "./components/DeliverySection";
-import { CertificateSection } from "./components/CertificateSection";
-import { ClientVehiclesSection } from "./components/ClientVehiclesSection";
-import { WarrantySection } from "./components/WarrantySection";
+import { AssuranceSection } from "./components/AssuranceSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { BookingSection } from "./components/BookingSection";
 import { Footer } from "./components/Footer";
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
-  instagram: "https://instagram.com/midnight_autostudio.eu",
-  whatsapp: "https://wa.me/38630358407",
+  instagram: "https://instagram.com/midnightautostudio.eu",
+  whatsapp: "https://wa.me/38640813855",
 };
 
 const HERO_VIDEO =
@@ -698,6 +693,14 @@ export default function Home() {
           { number: "02", title: t("why2t"), description: t("why2d") },
           { number: "03", title: t("why3t"), description: t("why3d") },
         ]}
+        brandsLabel={
+          lang === "sl"
+            ? "Specializirani za"
+            : lang === "de"
+              ? "Spezialisiert auf"
+              : "Specialised in"
+        }
+        brands={["PORSCHE", "BMW M", "AUDI RS", "AMG"]}
       />
 
       <ProcessSection
@@ -1063,10 +1066,116 @@ export default function Home() {
         ]}
       />
 
-      <GuaranteeSection
-        kicker={t("guaranteeKicker")}
-        title={t("guaranteeTitle")}
-        subtitle={t("guaranteeSub")}
+      <AssuranceSection
+        kicker={
+          lang === "sl"
+            ? "ASSURANCE"
+            : lang === "de"
+              ? "ASSURANCE"
+              : "ASSURANCE"
+        }
+        title={
+          lang === "sl"
+            ? "GARANCIJA, ZAŠČITA IN PREDAJA"
+            : lang === "de"
+              ? "GARANTIE, SCHUTZ UND ÜBERGABE"
+              : "GUARANTEE, WARRANTY & OWNERSHIP"
+        }
+        subtitle={
+          lang === "sl"
+            ? "Vsak projekt je podprt s studijskim standardom, proizvajalčevo garancijo in popolno izkušnjo prevzema vozila."
+            : lang === "de"
+              ? "Jedes Projekt ist durch Studio-Standard, Herstellergarantie und eine vollständige Übergabe-Erfahrung abgesichert."
+              : "Every project is backed by the studio standard, a manufacturer warranty and a complete delivery experience."
+        }
+        pillars={[
+          {
+            kicker: t("guaranteeKicker"),
+            title: t("guaranteeTitle"),
+            description: t("guaranteeSub"),
+            bullets: [
+              lang === "sl"
+                ? "Popravek instalacijskih napak — brezplačno."
+                : lang === "de"
+                  ? "Kostenlose Korrektur von Installationsfehlern."
+                  : "Installation defects corrected — free of charge.",
+              lang === "sl"
+                ? "Ponovna montaža panela, če popravek ni dovolj."
+                : lang === "de"
+                  ? "Neuinstallation des Panels, wenn nötig."
+                  : "Panel reinstallation if the correction is not enough.",
+              lang === "sl"
+                ? "Delni ali polni refund, če težave ni mogoče odpraviti."
+                : lang === "de"
+                  ? "Teilweise oder vollständige Rückerstattung, falls unlösbar."
+                  : "Partial or full refund if the issue cannot be resolved.",
+            ],
+          },
+          {
+            kicker: t("warrantyKicker"),
+            title: t("warrantyTitle"),
+            description: t("warrantyText"),
+            bullets: [
+              lang === "sl"
+                ? "5–10 let proizvajalčeve garancije."
+                : lang === "de"
+                  ? "5–10 Jahre Herstellergarantie."
+                  : "5–10 year manufacturer warranty.",
+              lang === "sl"
+                ? "Self-healing tehnologija vrhnjega sloja."
+                : lang === "de"
+                  ? "Self-Healing-Technologie der Deckschicht."
+                  : "Self-healing top coat technology.",
+              lang === "sl"
+                ? "Odpornost na UV in madeže."
+                : lang === "de"
+                  ? "UV- und Fleckenbeständigkeit."
+                  : "UV and stain resistance.",
+              lang === "sl"
+                ? "Ohranja originalni lak in vrednost vozila."
+                : lang === "de"
+                  ? "Erhält Originallack und Fahrzeugwert."
+                  : "Preserves original paint and resale value.",
+            ],
+          },
+          {
+            kicker: t("deliveryKicker"),
+            title:
+              lang === "sl"
+                ? "OWNERSHIP PAKET"
+                : lang === "de"
+                  ? "OWNERSHIP-PAKET"
+                  : "OWNERSHIP PACKAGE",
+            description:
+              lang === "sl"
+                ? "Zaključen projekt pomeni tudi premium izkušnjo prevzema — dokumentacija, certifikat in jasna navodila za nego."
+                : lang === "de"
+                  ? "Ein abgeschlossenes Projekt bedeutet auch eine hochwertige Übergabe — Dokumentation, Zertifikat und klare Pflegehinweise."
+                  : "Every completed project ends with a premium handover — documentation, certificate and clear care guidance.",
+            bullets: [
+              lang === "sl"
+                ? "Personaliziran studio certifikat projekta."
+                : lang === "de"
+                  ? "Personalisiertes Studio-Zertifikat des Projekts."
+                  : "Personalised studio project certificate.",
+              lang === "sl"
+                ? "Garancijska knjižica z natančnimi navodili."
+                : lang === "de"
+                  ? "Garantieheft mit detaillierten Pflegehinweisen."
+                  : "Warranty booklet with detailed care instructions.",
+              lang === "sl"
+                ? "Navodila za pravilno nego PPF in wrap folije."
+                : lang === "de"
+                  ? "Anleitung zur richtigen Pflege von PPF und Wrap."
+                  : "Guidance for correct PPF and wrap film care.",
+              lang === "sl"
+                ? "Priporočila za dolgoročno vzdrževanje videza."
+                : lang === "de"
+                  ? "Empfehlungen zur langfristigen Werterhaltung."
+                  : "Recommendations for long-term appearance upkeep.",
+            ],
+          },
+        ]}
         footnote={
           lang === "sl"
             ? "Garancija velja za instalacijske napake in mora biti prijavljena v 7 dneh po prevzemu vozila."
@@ -1074,54 +1183,21 @@ export default function Home() {
               ? "Die Garantie gilt für Installationsfehler und muss innerhalb von 7 Tagen gemeldet werden."
               : "Guarantee applies to installation defects and must be reported within 7 days after delivery."
         }
+        notCoveredLabel={
+          lang === "sl"
+            ? "KAJ NI POKRITO"
+            : lang === "de"
+              ? "WAS NICHT ABGEDECKT IST"
+              : "WHAT IS NOT COVERED"
+        }
         notCoveredTitle={t("notCovered")}
-        cards={[
-          {
-            step: "01",
-            title:
-              lang === "sl"
-                ? "Popravek"
-                : lang === "de"
-                  ? "Korrektur"
-                  : "Correction",
-            description:
-              lang === "sl"
-                ? "Če opazite instalacijsko napako, jo brezplačno popravimo."
-                : lang === "de"
-                  ? "Installationsfehler werden kostenlos korrigiert."
-                  : "Any installation defect will be corrected free of charge.",
-          },
-          {
-            step: "02",
-            title:
-              lang === "sl"
-                ? "Ponovna montaža"
-                : lang === "de"
-                  ? "Neuinstallation"
-                  : "Reinstallation",
-            description:
-              lang === "sl"
-                ? "Če popravek ni dovolj, panel ponovno montiramo."
-                : lang === "de"
-                  ? "Wenn nötig wird das Panel erneut installiert."
-                  : "If needed the panel will be reinstalled.",
-          },
-          {
-            step: "03",
-            title:
-              lang === "sl"
-                ? "Refund"
-                : lang === "de"
-                  ? "Rückerstattung"
-                  : "Refund",
-            description:
-              lang === "sl"
-                ? "Če težave ni mogoče odpraviti, omogočamo delni ali polni refund."
-                : lang === "de"
-                  ? "Wenn das Problem nicht lösbar ist, bieten wir eine teilweise oder vollständige Rückerstattung."
-                  : "If the issue cannot be resolved, we offer a partial or full refund.",
-          },
-        ]}
+        notCoveredIntro={
+          lang === "sl"
+            ? "Primeri situacij, kjer poškodbe ali obraba niso več del studijske odgovornosti."
+            : lang === "de"
+              ? "Situationen, in denen Schäden oder Verschleiß außerhalb der Studio-Verantwortung liegen."
+              : "Situations where damage or wear is outside the studio's responsibility."
+        }
         notCoveredItems={[
           lang === "sl"
             ? "Poškodbe po prevzemu vozila (kamenčki, praske, nesreče)."
@@ -1151,122 +1227,6 @@ export default function Home() {
         ]}
       />
 
-      <CareSection
-        kicker={t("careKicker")}
-        title={t("careTitle")}
-        description={t("careText")}
-        bookletNote={
-          lang === "sl"
-            ? "Podrobna navodila so vključena v garancijski knjižici, ki jo prejme vsaka stranka po zaključku projekta."
-            : lang === "de"
-              ? "Detaillierte Pflegehinweise befinden sich im Garantieheft, das jeder Kunde nach Abschluss erhält."
-              : "Detailed instructions are included in the warranty booklet delivered with every completed project."
-        }
-        bullets={[
-          lang === "sl"
-            ? "Ročno pranje vozila"
-            : lang === "de"
-              ? "Handwäsche empfohlen"
-              : "Hand washing recommended",
-          lang === "sl"
-            ? "Brez agresivnih kemikalij"
-            : lang === "de"
-              ? "Keine aggressiven Chemikalien"
-              : "Avoid aggressive chemicals",
-          lang === "sl"
-            ? "Varno sušenje z mikrovlakni"
-            : lang === "de"
-              ? "Trocknen mit Mikrofasertuch"
-              : "Safe microfiber drying",
-          lang === "sl"
-            ? "Redno vzdrževanje za maksimalen izgled"
-            : lang === "de"
-              ? "Regelmäßige Pflege für bestes Ergebnis"
-              : "Regular maintenance for best appearance",
-        ]}
-      />
-
-      <DeliverySection
-        kicker={t("deliveryKicker")}
-        title={t("deliveryTitle")}
-        description={t("deliveryText")}
-        imageSrc={IMG.delivery}
-        imageAlt="Delivery"
-        bullets={[
-          lang === "sl"
-            ? "Garancijska knjižica"
-            : lang === "de"
-              ? "Garantieheft"
-              : "Warranty booklet",
-          lang === "sl"
-            ? "Navodila za vzdrževanje"
-            : lang === "de"
-              ? "Pflegeanleitung"
-              : "Care instructions",
-          lang === "sl"
-            ? "Studio certifikat projekta"
-            : lang === "de"
-              ? "Studio Zertifikat"
-              : "Studio certificate",
-          lang === "sl"
-            ? "Priporočila za nadaljnje vzdrževanje"
-            : lang === "de"
-              ? "Empfehlungen zur Pflege"
-              : "Maintenance recommendations",
-        ]}
-      />
-
-      <CertificateSection
-        kicker={t("certKicker")}
-        title={t("certTitle")}
-        description={t("certText")}
-        imageSrc={IMG.certificate}
-        imageAlt="Certificate"
-        bullets={[
-          lang === "sl"
-            ? "Model vozila"
-            : lang === "de"
-              ? "Fahrzeugmodell"
-              : "Vehicle model",
-          lang === "sl"
-            ? "Datum montaže"
-            : lang === "de"
-              ? "Installationsdatum"
-              : "Installation date",
-          lang === "sl"
-            ? "Uporabljena folija"
-            : lang === "de"
-              ? "Verwendete Folie"
-              : "Film used",
-          lang === "sl"
-            ? "Podpis studia"
-            : lang === "de"
-              ? "Studio Unterschrift"
-              : "Studio signature",
-        ]}
-      />
-
-      <ClientVehiclesSection
-        kicker={t("clientVehiclesKicker")}
-        title={t("clientVehiclesTitle")}
-        subtitle={t("clientVehiclesSub")}
-        brands={["PORSCHE", "BMW M", "AUDI RS", "AMG"]}
-      />
-
-      <WarrantySection
-        kicker={t("warrantyKicker")}
-        title={t("warrantyTitle")}
-        description={t("warrantyText")}
-        imageSrc={IMG.warranty}
-        imageAlt="Warranty"
-        bullets={[
-          "5–10 year manufacturer warranty",
-          "Self-healing top coat technology",
-          "UV and stain resistance",
-          "Paint preservation & resale value",
-        ]}
-      />
-
       <TestimonialsSection
         kicker={t("testimonialsKicker")}
         title={t("testimonialsTitle")}
@@ -1282,7 +1242,7 @@ export default function Home() {
             quote: "The design preview made the decision incredibly easy.",
           },
           {
-            name: "Audi RS6 Owner",
+            name: "Audi RS7 Owner",
             quote: "This is not a wrap shop. It's a true automotive studio.",
           },
         ]}
