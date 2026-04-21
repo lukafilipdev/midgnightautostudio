@@ -708,32 +708,206 @@ export default function Home() {
           {
             number: "01",
             title: lang === "sl" ? "Posvet" : lang === "de" ? "Beratung" : "Consultation",
-            description: lang === "sl" ? "Pregled vozila in ciljev projekta." : lang === "de" ? "Analyse des Fahrzeugs und der Ziele." : "Vehicle inspection and project goals.",
+            description:
+              lang === "sl"
+                ? "Pregled vozila in ciljev projekta."
+                : lang === "de"
+                  ? "Analyse des Fahrzeugs und der Ziele."
+                  : "Vehicle inspection and project goals.",
+            details:
+              lang === "sl"
+                ? "Vsak projekt se začne z natančnim posvetom. Pregledamo vozilo, željen vizualni rezultat, tip uporabe in nivo zaščite, da definiramo rešitev, ki je estetsko čista in tehnično smiselna."
+                : lang === "de"
+                  ? "Jedes Projekt beginnt mit einer präzisen Beratung. Wir analysieren das Fahrzeug, die gewünschte Optik, den Einsatzzweck und das erforderliche Schutzniveau, damit das Ergebnis visuell und technisch überzeugt."
+                  : "Every project starts with a precise consultation. We assess the vehicle, the desired visual direction, real-world use, and protection level so the final solution feels both technically correct and visually elevated.",
+            bullets:
+              lang === "sl"
+                ? [
+                    "Pregled trenutnega stanja vozila in površin.",
+                    "Opredelitev cilja: zaščita, sprememba videza ali oboje.",
+                    "Izbira prave smeri glede na vozilo in uporabo.",
+                  ]
+                : lang === "de"
+                  ? [
+                      "Bewertung des aktuellen Zustands von Lack und Oberflächen.",
+                      "Definition des Ziels: Schutz, Transformation oder beides.",
+                      "Empfehlung der passenden Richtung für Fahrzeug und Nutzung.",
+                    ]
+                  : [
+                      "Assessment of paint condition and critical surfaces.",
+                      "Clear definition of the goal: protection, transformation, or both.",
+                      "Recommendation shaped around the car and how it is used.",
+                    ],
           },
           {
             number: "02",
             title: "3D Preview",
-            description: lang === "sl" ? "Vizualizacija barve, finisha in detajlov." : lang === "de" ? "Visualisierung von Finish und Details." : "Design preview before installation.",
+            description:
+              lang === "sl"
+                ? "Vizualizacija barve, finisha in detajlov."
+                : lang === "de"
+                  ? "Visualisierung von Finish und Details."
+                  : "Design preview before installation.",
+            details:
+              lang === "sl"
+                ? "Preden karkoli namestimo, pripravimo vizualno smer projekta. Tako lahko preverimo razmerja, ton materiala, kontraste in detajle, še preden se začne izvedba."
+                : lang === "de"
+                  ? "Bevor die Umsetzung beginnt, entwickeln wir eine klare visuelle Vorschau. So prüfen wir Proportionen, Materialwirkung, Kontraste und Details bereits vor der Montage."
+                  : "Before installation begins, we build a clear visual preview of the project. This allows us to refine proportions, material tone, contrast, and small design decisions before execution.",
+            bullets:
+              lang === "sl"
+                ? [
+                    "Preizkus barv, satin/gloss finishov in kontrastov.",
+                    "Vizualna potrditev detajlov pred izvedbo.",
+                    "Manj tveganja, več jasnosti pred montažo.",
+                  ]
+                : lang === "de"
+                  ? [
+                      "Test von Farben, Satin-/Gloss-Finishes und Kontrasten.",
+                      "Visuelle Freigabe wichtiger Details vor der Umsetzung.",
+                      "Weniger Unsicherheit, mehr Klarheit vor der Montage.",
+                    ]
+                  : [
+                      "Testing of colors, satin/gloss finishes, and contrasts.",
+                      "Visual approval of key details before execution.",
+                      "Less guesswork, more confidence before installation.",
+                    ],
           },
           {
             number: "03",
             title: lang === "sl" ? "Priprava" : lang === "de" ? "Vorbereitung" : "Preparation",
-            description: lang === "sl" ? "Temeljito čiščenje in dekontaminacija." : lang === "de" ? "Gründliche Reinigung und Vorbereitung." : "Deep cleaning and surface preparation.",
+            description:
+              lang === "sl"
+                ? "Temeljito čiščenje in dekontaminacija."
+                : lang === "de"
+                  ? "Gründliche Reinigung und Vorbereitung."
+                  : "Deep cleaning and surface preparation.",
+            details:
+              lang === "sl"
+                ? "Kakovost končnega rezultata je odvisna od priprave. Vozilo temeljito očistimo, dekontaminiramo in pripravimo vse površine, da se material oprime pravilno in ostane brez kompromisov."
+                : lang === "de"
+                  ? "Die Qualität des Endergebnisses hängt direkt von der Vorbereitung ab. Das Fahrzeug wird gründlich gereinigt, dekontaminiert und für eine präzise, saubere Verarbeitung vorbereitet."
+                  : "The quality of the final result depends on preparation. We deep-clean, decontaminate, and prepare every relevant surface so the material bonds properly and the finish stays clean.",
+            bullets:
+              lang === "sl"
+                ? [
+                    "Dekontaminacija laka in kritičnih območij.",
+                    "Priprava robov, rež in zahtevnih linij.",
+                    "Osnova za natančno in trajno montažo.",
+                  ]
+                : lang === "de"
+                  ? [
+                      "Dekontamination von Lack und kritischen Bereichen.",
+                      "Vorbereitung von Kanten, Spalten und komplexen Linien.",
+                      "Basis für eine präzise und dauerhafte Montage.",
+                    ]
+                  : [
+                      "Decontamination of paint and critical areas.",
+                      "Preparation of edges, gaps, and complex body lines.",
+                      "Foundation for a precise and lasting installation.",
+                    ],
           },
           {
             number: "04",
             title: lang === "sl" ? "Montaža" : lang === "de" ? "Installation" : "Installation",
-            description: lang === "sl" ? "Natančna studijska montaža." : lang === "de" ? "Präzise Studio-Installation." : "Precision film installation.",
+            description:
+              lang === "sl"
+                ? "Natančna studijska montaža."
+                : lang === "de"
+                  ? "Präzise Studio-Installation."
+                  : "Precision film installation.",
+            details:
+              lang === "sl"
+                ? "Montaža poteka studijsko, kontrolirano in brez hitenja. Fokus je na čisti izvedbi, pravilnih napetostih materiala, poravnavi linij in brezhibnem zaključku."
+                : lang === "de"
+                  ? "Die Montage erfolgt kontrolliert im Studio, ohne Zeitdruck. Entscheidend sind saubere Ausführung, korrekte Materialspannung, exakte Linienführung und ein makelloses Finish."
+                  : "Installation is carried out in a controlled studio environment without rushing. The focus is on clean execution, correct material tension, line alignment, and a finish that looks intentional from every angle.",
+            bullets:
+              lang === "sl"
+                ? [
+                    "Studijska montaža v kontroliranih pogojih.",
+                    "Natančna poravnava linij in panelov.",
+                    "Čist zaključek brez vizualnega šuma.",
+                  ]
+                : lang === "de"
+                  ? [
+                      "Studio-Installation unter kontrollierten Bedingungen.",
+                      "Präzise Ausrichtung von Linien und Flächen.",
+                      "Sauberes Finish ohne visuellen Störfaktor.",
+                    ]
+                  : [
+                      "Studio installation under controlled conditions.",
+                      "Precise alignment across lines and panels.",
+                      "A clean finish with no visual noise.",
+                    ],
           },
           {
             number: "05",
             title: lang === "sl" ? "Kontrola" : lang === "de" ? "Qualitätskontrolle" : "Quality Control",
-            description: lang === "sl" ? "Kontrola robov, linij in površine." : lang === "de" ? "Kontrolle von Kanten und Oberflächen." : "Edge and surface inspection.",
+            description:
+              lang === "sl"
+                ? "Kontrola robov, linij in površine."
+                : lang === "de"
+                  ? "Kontrolle von Kanten und Oberflächen."
+                  : "Edge and surface inspection.",
+            details:
+              lang === "sl"
+                ? "Po montaži sledi detajlna kontrola vseh robov, prehodov, napetosti materiala in optične čistosti površine. Tukaj se loči običajna izvedba od res premium rezultata."
+                : lang === "de"
+                  ? "Nach der Montage folgt eine präzise Kontrolle von Kanten, Übergängen, Materialspannung und der optischen Reinheit der Oberfläche. Genau hier trennt sich Standard von Premium."
+                  : "After installation, every edge, transition, material tension point, and visible surface is checked. This is where standard execution separates from a truly premium result.",
+            bullets:
+              lang === "sl"
+                ? [
+                    "Pregled vseh robov in kritičnih prehodov.",
+                    "Kontrola površine pod studijsko svetlobo.",
+                    "Zadnje korekcije pred predajo.",
+                  ]
+                : lang === "de"
+                  ? [
+                      "Kontrolle aller Kanten und kritischen Übergänge.",
+                      "Prüfung der Oberfläche unter Studio-Licht.",
+                      "Letzte Korrekturen vor der Übergabe.",
+                    ]
+                  : [
+                      "Inspection of all edges and critical transitions.",
+                      "Surface review under studio lighting.",
+                      "Final refinements before handover.",
+                    ],
           },
           {
             number: "06",
             title: lang === "sl" ? "Predaja" : lang === "de" ? "Übergabe" : "Delivery",
-            description: lang === "sl" ? "Vozilo pripravljeno za prevzem." : lang === "de" ? "Fahrzeug bereit zur Übergabe." : "Vehicle ready for collection.",
+            description:
+              lang === "sl"
+                ? "Vozilo pripravljeno za prevzem."
+                : lang === "de"
+                  ? "Fahrzeug bereit zur Übergabe."
+                  : "Vehicle ready for collection.",
+            details:
+              lang === "sl"
+                ? "Ko je projekt zaključen, je vozilo pripravljeno za prevzem v stanju, ki ustreza standardu studia. Predamo tudi osnovna priporočila za nego in dolgoročen videz materiala."
+                : lang === "de"
+                  ? "Nach Abschluss des Projekts wird das Fahrzeug in Studio-Qualität übergeben. Zusätzlich erhalten Sie die wichtigsten Hinweise für Pflege und langfristige Optik."
+                  : "Once the project is complete, the vehicle is delivered in studio-standard condition. You also receive clear aftercare guidance to preserve the finish and long-term appearance.",
+            bullets:
+              lang === "sl"
+                ? [
+                    "Končna predstavitev vozila in rezultata.",
+                    "Navodila za nego in vzdrževanje.",
+                    "Pripravljeno za prevzem brez kompromisov.",
+                  ]
+                : lang === "de"
+                  ? [
+                      "Finale Präsentation von Fahrzeug und Ergebnis.",
+                      "Hinweise zu Pflege und Werterhalt.",
+                      "Bereit zur Übergabe ohne Kompromisse.",
+                    ]
+                  : [
+                      "Final presentation of the vehicle and result.",
+                      "Aftercare guidance for upkeep and longevity.",
+                      "Ready for collection without compromise.",
+                    ],
           },
         ]}
       />

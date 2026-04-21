@@ -9,6 +9,18 @@ interface ClientVehiclesSectionProps {
   brands: string[];
 }
 
+// Logo matcher (clean + AMG support)
+const getVehicleLogo = (name: string) => {
+  const n = name.toLowerCase().trim();
+
+  if (n.includes("porsche")) return "/porsche.png";
+  if (n.includes("bmw")) return "/bmw.png";
+  if (n.includes("audi")) return "/audi.png";
+  if (n.includes("mercedes") || n.includes("amg")) return "/amg.png";
+
+  return null;
+};
+
 export function ClientVehiclesSection({
   kicker,
   title,
@@ -64,25 +76,40 @@ export function ClientVehiclesSection({
           <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px -translate-y-1/2 bg-white/[0.018] z-0" />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 relative z-10">
-            {brands.map((brand, i) => (
-              <div
-                key={i}
-                className={`material-card transition-all duration-700 ease-out ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                }`}
-                style={{ transitionDelay: `${120 + i * 80}ms` }}
-              >
-                <div className="material-card-inner">
-                  <p
-                    className={`font-semibold tracking-[0.08em] uppercase ${
-                      brand.length > 10 ? "text-base md:text-lg" : "text-lg md:text-xl"
-                    }`}
-                  >
-                    {brand}
-                  </p>
+            {brands.map((brand, i) => {
+              const logoSrc = getVehicleLogo(brand);
+
+              return (
+                <div
+                  key={i}
+                  className={`material-card transition-all duration-700 ease-out ${
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  }`}
+                  style={{ transitionDelay: `${120 + i * 80}ms` }}
+                >
+                  <div className="material-card-inner flex flex-col items-center justify-center text-center gap-4">
+                    
+                    {/* Logo */}
+                    {logoSrc && (
+                      <img
+                        src={logoSrc}
+                        alt={brand}
+                        className="h-[48px] md:h-[64px] w-auto max-w-[140px] object-contain opacity-90 transition duration-300 hover:opacity-100"
+                      />
+                    )}
+
+                    {/* Brand */}
+                    <p
+                      className={`font-semibold tracking-[0.08em] uppercase ${
+                        brand.length > 10 ? "text-base md:text-lg" : "text-lg md:text-xl"
+                      }`}
+                    >
+                      {brand}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
