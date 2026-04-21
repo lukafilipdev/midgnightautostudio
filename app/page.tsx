@@ -9,7 +9,6 @@ import { ProcessSection } from "./components/ProcessSection";
 import { MaterialsSection } from "./components/MaterialsSection";
 import { StudioSection } from "./components/StudioSection";
 import { FeaturedBuildsSection } from "./components/FeaturedBuildsSection";
-import { GallerySection } from "./components/GallerySection";
 import { ConfiguratorSection } from "./components/ConfiguratorSection";
 import { ProtectionDemo } from "./components/ProtectionDemo";
 import { ServicesSection } from "./components/ServicesSection";
@@ -635,8 +634,8 @@ export default function Home() {
 
   const projects = useMemo(
     () => [
-      { src: IMG.m4, label: "BMW M4 · Full Body PPF", tag: "PPF" },
-      { src: IMG.p911, label: "Porsche 911 · Satin Wrap", tag: "WRAP" },
+      { src: "/porscheproject.jpg", label: "Porsche 911 · Full Body PPF", tag: "PPF" },
+      { src: "/audiproject.jpg", label: "AUDI SQ8 · Full Body Wrap", tag: "WRAP" },
       { src: IMG.rs6, label: "Audi RS6 · Track Protection", tag: "TRACK" },
     ],
     []
@@ -950,18 +949,6 @@ export default function Home() {
         installationText={lang === "sl" ? "3D predogled · Studijska montaža" : lang === "de" ? "3D-Vorschau · Studio-Installation" : "Design preview · Studio installation"}
         viewProjectText={lang === "sl" ? "Poglej projekt" : lang === "de" ? "Projekt ansehen" : "View project"}
         viewAllText={lang === "sl" ? "Poglej vse projekte" : lang === "de" ? "Alle Projekte ansehen" : "View all projects"}
-      />
-
-      <GallerySection
-        kicker={t("galleryKicker")}
-        title={t("galleryTitle")}
-        subtitle={t("gallerySub")}
-        items={gallery}
-        galleryLabel={t("galleryLabel")}
-        prevLabel={t("prev")}
-        nextLabel={t("next")}
-        dotLabel={t("dot")}
-        detailText={lang === "sl" ? "Butični finish · Precizni robovi · Studijska osvetlitev" : lang === "de" ? "Boutique-Finish · Präzise Kanten · Studiobeleuchtung" : "Boutique finish · Precision edges · Studio lighting"}
       />
 
       <ConfiguratorSection
