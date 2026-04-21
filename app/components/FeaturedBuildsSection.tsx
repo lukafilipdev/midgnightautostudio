@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface Project {
@@ -85,7 +86,7 @@ export function FeaturedBuildsSection({
             }`}
             style={{ transitionDelay: `${150 + i * 120}ms` }}
           >
-            <div className="project-image-wrapper relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.06]">
+            <div className="project-image-wrapper relative h-[300px] md:h-[360px] overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.06]">
               
               {/* Tag */}
               {p.tag && (
@@ -95,11 +96,12 @@ export function FeaturedBuildsSection({
               )}
 
               {/* Image */}
-              <img
+              <Image
                 src={p.src}
                 alt={p.label}
-                className="project-image w-full h-[300px] md:h-[360px] object-cover"
-                loading="lazy"
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="project-image object-cover"
               />
 
               {/* Hover Overlay */}

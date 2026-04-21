@@ -39,22 +39,12 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Long-cache the locally-served, content-hashed static chunks.
-  // /public files keep the default no-cache so swapping an image still
-  // propagates to returning visitors.
+  // Long-cache any hand-placed fonts under /public. Next.js already sets
+  // `Cache-Control: public, max-age=31536000, immutable` on /_next/static/**
+  // (fingerprinted chunks + next/font output) in production, so we don't
+  // override that route here.
   async headers() {
     return [
-      {
-        source: "/_next/static/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: `public, max-age=${ONE_YEAR}, immutable`,
-          },
-        ],
-      },
-      // Fonts self-hosted by next/font are already fingerprinted under
-      // /_next/static above; this just covers any hand-placed ones.
       {
         source: "/:path*.(woff|woff2|ttf|otf)",
         headers: [

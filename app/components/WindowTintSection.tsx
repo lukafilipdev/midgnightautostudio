@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export interface WindowTintFeature {
@@ -125,10 +126,12 @@ export function WindowTintSection({
           >
             {/* Base image (right side stays visible) */}
             <div className="absolute inset-0">
-              <img
+              <Image
                 src={afterImage}
                 alt="Po temnenju stekel"
-                className="h-full w-full object-cover pointer-events-none select-none"
+                fill
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover pointer-events-none select-none"
                 draggable={false}
               />
             </div>
@@ -142,10 +145,12 @@ export function WindowTintSection({
                 className="absolute inset-y-0 left-0"
                 style={{ width: containerRef.current?.offsetWidth || "100%" }}
               >
-                <img
+                <Image
                   src={beforeImage}
                   alt="Pred temnenjem stekel"
-                  className="h-full w-full object-cover pointer-events-none select-none"
+                  fill
+                  sizes="(min-width: 1024px) 1024px, 100vw"
+                  className="object-cover pointer-events-none select-none"
                   draggable={false}
                 />
               </div>

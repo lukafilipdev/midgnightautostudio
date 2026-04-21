@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface Brand {
@@ -111,9 +112,11 @@ export function MaterialsSection({
                     
                     {/* Logo */}
                     {logoSrc && (
-                      <img
+                      <Image
                         src={logoSrc}
                         alt={brand.name}
+                        width={140}
+                        height={64}
                         className="h-[48px] md:h-[64px] w-auto max-w-[140px] object-contain opacity-90 transition duration-300 hover:opacity-100"
                       />
                     )}

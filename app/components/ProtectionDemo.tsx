@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface BenefitCard {
@@ -124,10 +125,12 @@ export function ProtectionDemo({
           >
             {/* After */}
             <div className="absolute inset-0">
-              <img
+              <Image
                 src={afterImage}
                 alt="Zaščiten lak"
-                className="h-full w-full object-cover pointer-events-none select-none"
+                fill
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover pointer-events-none select-none"
                 draggable={false}
               />
             </div>
@@ -141,10 +144,12 @@ export function ProtectionDemo({
                 className="absolute inset-y-0 left-0"
                 style={{ width: containerRef.current?.offsetWidth || "100%" }}
               >
-                <img
+                <Image
                   src={beforeImage}
                   alt="Lak brez PPF"
-                  className="h-full w-full object-cover pointer-events-none select-none"
+                  fill
+                  sizes="(min-width: 1024px) 1024px, 100vw"
+                  className="object-cover pointer-events-none select-none"
                   draggable={false}
                 />
               </div>

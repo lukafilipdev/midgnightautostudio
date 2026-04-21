@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface StudioSectionProps {
@@ -68,15 +69,17 @@ export function StudioSection({ kicker, title, description, features, imageSrc }
 
         {/* Image */}
         <div
-          className={`studio-image-wrapper transition-all duration-700 ease-out ${
+          className={`studio-image-wrapper relative w-full h-[420px] transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-5"
           }`}
           style={{ transitionDelay: "150ms" }}
         >
-          <img
+          <Image
             src={imageSrc}
-            className="w-full h-[420px] object-cover"
             alt="Studio"
+            fill
+            sizes="(min-width: 768px) 576px, 100vw"
+            className="object-cover"
           />
         </div>
       </div>

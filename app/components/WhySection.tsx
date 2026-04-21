@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useEffect, useRef, useState } from "react";
 
 interface WhyItem {
@@ -137,9 +139,11 @@ export function WhySection({
                       className="flex flex-col items-center justify-center gap-2.5 opacity-70 transition-opacity duration-300 hover:opacity-100"
                     >
                       {logoSrc ? (
-                        <img
+                        <Image
                           src={logoSrc}
                           alt={brand}
+                          width={110}
+                          height={44}
                           className="h-9 w-auto max-w-[110px] object-contain md:h-11"
                         />
                       ) : null}
