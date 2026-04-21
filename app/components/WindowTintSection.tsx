@@ -22,8 +22,8 @@ export function WindowTintSection({
   title,
   subtitle,
   features,
-  beforeImage = "/window1.png",
-  afterImage = "/window2.png",
+  beforeImage = "/window1.webp",
+  afterImage = "/window2.webp",
 }: WindowTintSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);

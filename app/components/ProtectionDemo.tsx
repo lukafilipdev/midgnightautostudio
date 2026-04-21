@@ -21,8 +21,8 @@ export function ProtectionDemo({
   title,
   subtitle,
   benefits,
-  beforeImage = "/before1.png",
-  afterImage = "/after1.png",
+  beforeImage = "/before1.webp",
+  afterImage = "/after1.webp",
 }: ProtectionDemoProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);

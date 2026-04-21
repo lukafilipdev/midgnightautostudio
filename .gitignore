@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# archived original (unoptimized) raster assets — kept locally, never shipped
+/public/_originals/

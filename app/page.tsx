@@ -634,8 +634,8 @@ export default function Home() {
 
   const projects = useMemo(
     () => [
-      { src: "/porscheproject.jpg", label: "Porsche 911 · Full Body PPF", tag: "PPF" },
-      { src: "/audiproject.jpg", label: "AUDI SQ8 · Full Body Wrap", tag: "WRAP" },
+      { src: "/porscheproject.webp", label: "Porsche 911 · Full Body PPF", tag: "PPF" },
+      { src: "/audiproject.webp", label: "AUDI SQ8 · Full Body Wrap", tag: "WRAP" },
       { src: IMG.rs6, label: "Audi RS6 · Track Protection", tag: "TRACK" },
     ],
     []
@@ -938,7 +938,7 @@ export default function Home() {
               ? ["LED-Studiobeleuchtung", "Staubkontrollierter Arbeitsbereich", "Temperaturgeregelte Installation", "Präzisionsschnitt und Kantenumwicklung"]
               : ["LED studio lighting", "Dust controlled workspace", "Temperature regulated installation", "Precision cutting & edge wrapping"]
         }
-        imageSrc="/midnight-studio.png"
+        imageSrc="/midnight-studio.webp"
       />
 
       <FeaturedBuildsSection

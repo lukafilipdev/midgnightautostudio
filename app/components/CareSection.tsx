@@ -94,7 +94,7 @@ export function CareSection({
           style={{ transitionDelay: "150ms" }}
         >
           <img
-            src="/guarantee.png"
+            src="/guarantee.webp"
             className="w-full h-[420px] object-cover"
             alt="Care"
           />

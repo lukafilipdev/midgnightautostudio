@@ -19,10 +19,10 @@ interface MaterialsSectionProps {
 const getLogo = (name: string) => {
   const n = name.toLowerCase();
 
-  if (n.includes("skyfol")) return "/skyfol.png";
-  if (n.includes("stek")) return "/stek.png";
-  if (n.includes("3m")) return "/3m.png";
-  if (n.includes("avery")) return "/avery.png";
+  if (n.includes("skyfol")) return "/skyfol.webp";
+  if (n.includes("stek")) return "/stek.webp";
+  if (n.includes("3m")) return "/3m.webp";
+  if (n.includes("avery")) return "/avery.webp";
 
   return null;
 };

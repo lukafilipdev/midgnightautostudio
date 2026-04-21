@@ -19,10 +19,10 @@ interface WhySectionProps {
 
 const getVehicleLogo = (name: string) => {
   const n = name.toLowerCase().trim();
-  if (n.includes("porsche")) return "/porsche.png";
-  if (n.includes("bmw")) return "/bmw.png";
-  if (n.includes("audi")) return "/audi.png";
-  if (n.includes("mercedes") || n.includes("amg")) return "/amg.png";
+  if (n.includes("porsche")) return "/porsche.webp";
+  if (n.includes("bmw")) return "/bmw.webp";
+  if (n.includes("audi")) return "/audi.webp";
+  if (n.includes("mercedes") || n.includes("amg")) return "/amg.webp";
   return null;
 };
 
