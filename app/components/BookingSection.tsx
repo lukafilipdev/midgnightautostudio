@@ -82,7 +82,7 @@ export function BookingSection({
     <section
       id="booking"
       ref={sectionRef}
-      className="relative px-6 py-20 md:py-28 border-t border-white/[0.06] overflow-hidden"
+      className="atm-top relative px-6 py-20 md:py-28 border-t border-white/[0.06] overflow-hidden"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}

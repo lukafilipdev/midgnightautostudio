@@ -14,7 +14,7 @@ export function Footer({ tagline }: FooterProps) {
           <div className="mb-8 flex items-center justify-center gap-4">
             <div className="h-px w-10 bg-white/[0.08]" />
             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.10] text-sm text-white/70">
-              N
+              M
             </div>
             <div className="h-px w-10 bg-white/[0.08]" />
           </div>

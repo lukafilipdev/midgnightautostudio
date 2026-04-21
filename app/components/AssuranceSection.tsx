@@ -60,7 +60,7 @@ export function AssuranceSection({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden border-t border-white/[0.06] px-6 py-20 md:py-28"
+      className="atm-center relative overflow-hidden border-t border-white/[0.06] px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-[1180px]">
         {/* Header */}
@@ -212,10 +212,6 @@ export function AssuranceSection({
         </div>
       </div>
 
-      {/* Subtle center glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
-        <div className="h-full w-[720px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.025),transparent_70%)]" />
-      </div>
     </section>
   );
 }

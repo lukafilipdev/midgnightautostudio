@@ -88,7 +88,7 @@ export function WindowTintSection({
   return (
     <section
       ref={sectionRef}
-      className="border-t border-white/[0.06] bg-black px-6 py-20 md:py-28"
+      className="atm-center border-t border-white/[0.06] px-6 py-20 md:py-28"
     >
       <div className="mx-auto max-w-[1100px]">
         {/* Header */}

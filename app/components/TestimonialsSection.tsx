@@ -44,7 +44,7 @@ export function TestimonialsSection({
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-28 px-6 border-t border-white/[0.06] overflow-hidden"
+      className="atm-center relative py-20 md:py-28 px-6 border-t border-white/[0.06] overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -119,10 +119,6 @@ export function TestimonialsSection({
         />
       </div>
 
-      {/* Soft glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.02] blur-3xl" />
-      </div>
     </section>
   );
 }

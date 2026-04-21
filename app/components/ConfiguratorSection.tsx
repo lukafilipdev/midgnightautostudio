@@ -145,7 +145,7 @@ export function ConfiguratorSection({
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-32 px-6 border-t border-neutral-900 bg-black"
+      className="atm-quiet py-20 md:py-32 px-6 border-t border-white/[0.06]"
     >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
         {/* Text Content */}

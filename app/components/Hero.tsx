@@ -14,15 +14,12 @@ interface HeroProps {
 export function Hero({ lang, requestText, viewBuildsText, limitedText }: HeroProps) {
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center px-6 pt-24 overflow-hidden bg-black">
-      
-      {/* Soft center glow (luxury lighting) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.06),transparent_60%)]" />
 
-      {/* Top fade (cinematic depth) */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.7),transparent_30%)]" />
+      {/* Atelier stage light — tighter ellipse kept to the upper half so it never spills into the bottom */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_35%,rgba(255,255,255,0.08),transparent_65%)]" />
 
-      {/* Bottom vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.6),transparent_35%)]" />
+      {/* Deep bottom blend — forces the last ~25% of Hero to pure #000 so it meets Why seamlessly */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[linear-gradient(to_bottom,transparent,#000_55%)]" />
 
       {/* Subtle noise */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.025] hero-noise" />

@@ -85,11 +85,26 @@ input[type="range"]::-moz-range-thumb {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Hero Section Enhancements */
+/* ============================================
+   UNIFIED SECTION BACKGROUND
+   Every section except Hero shares a single
+   pure-#000 canvas. No per-section glows,
+   so there is never a visible seam at any
+   top/bottom section boundary.
+   ============================================ */
+
+.atm-top,
+.atm-center,
+.atm-side,
+.atm-quiet {
+  background: #000000;
+}
+
+/* Hero Section */
 .hero-bg {
-  background: 
-    radial-gradient(circle at 50% 30%, rgba(255,255,255,0.06), transparent 60%),
-    linear-gradient(to bottom, #000000, #050505 60%, #000000);
+  background:
+    radial-gradient(ellipse 85% 55% at 50% 40%, rgba(255, 255, 255, 0.07), transparent 65%),
+    #000000;
 }
 
 .hero-noise {
@@ -220,7 +235,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Stats Section */
 .stats-section {
-  background: linear-gradient(to bottom, #000000, #020202);
+  background: #000000;
 }
 
 .stat-item {
@@ -252,9 +267,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Why Section */
 .why-section {
-  background:
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.03), transparent 60%),
-    linear-gradient(to bottom, #000000, #020202);
+  background: #000000;
 }
 
 .why-column {
@@ -285,9 +298,7 @@ input[type="range"]::-moz-range-thumb {
 /* Process Section */
 .process-section {
   position: relative;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.025), transparent 60%),
-    linear-gradient(to bottom, #000000, #020202);
+  background: #000000;
 }
 
 .process-glow {
@@ -423,9 +434,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Materials Section */
 .materials-section {
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.02), transparent 60%),
-    linear-gradient(to bottom, #000000, #020202);
+  background: #000000;
 }
 
 .material-card-inner {
@@ -451,9 +460,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Studio Section */
 .studio-section {
-  background:
-    radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.03), transparent 60%),
-    linear-gradient(to bottom, #000000, #020202);
+  background: #000000;
 }
 
 .studio-divider {
@@ -501,9 +508,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Featured Builds Section */
 .featured-section {
-  background:
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.03), transparent 60%),
-    #000000;
+  background: #000000;
 }
 
 .project-card {
@@ -567,9 +572,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Gallery Section */
 .gallery-section {
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.035), transparent 60%),
-    #000000;
+  background: #000000;
 }
 
 .gallery-wrapper {
