@@ -2,9 +2,31 @@ import type { Metadata } from "next";
 import { LegalDoc } from "../components/LegalDoc";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Midnight Auto Studio",
+  title: "Privacy Policy",
   description:
-    "How Midnight Auto Studio processes personal data in line with the GDPR and the Slovenian ZVOP-2.",
+    "How Midnight Auto Studio processes personal data in line with the EU GDPR and the Slovenian ZVOP-2.",
+  alternates: {
+    canonical: "/privacy",
+    languages: {
+      "x-default": "/privacy",
+      sl: "/privacy",
+      en: "/privacy",
+      de: "/privacy",
+    },
+  },
+  openGraph: {
+    type: "article",
+    url: "/privacy",
+    title: "Privacy Policy | Midnight Auto Studio",
+    description:
+      "How Midnight Auto Studio processes personal data in line with the EU GDPR and the Slovenian ZVOP-2.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Midnight Auto Studio",
+    description:
+      "How Midnight Auto Studio processes personal data in line with the EU GDPR and the Slovenian ZVOP-2.",
+  },
   robots: { index: true, follow: true },
 };
 

@@ -46,6 +46,48 @@ How it works:
 If you later add marketing/ads scripts, gate them behind the `marketing` flag
 in the consent object (same pattern as `Analytics.tsx`).
 
+## SEO
+
+The site ships with a production-ready SEO layer. Most of it lives in
+`app/layout.tsx`, plus dedicated route handlers.
+
+- **Rich Metadata API** (`app/layout.tsx`): `metadataBase`, canonical + hreflang
+  alternates, Open Graph + Twitter Cards, keywords, robots/Googlebot directives,
+  `icons`, `manifest` and a `title.template` so child pages only need their own
+  title.
+- **Viewport** export: `theme-color`, `color-scheme: dark`, `viewport-fit: cover`.
+- **Structured data (JSON-LD)** embedded in `<head>`: `Organization`, `WebSite`
+  and `AutomotiveBusiness` with services, contact, social profiles and area
+  served. Update `telephone` / `address` there once the public business address
+  is finalised.
+- **`app/sitemap.ts`** → `/sitemap.xml` listing `/`, `/privacy`, `/cookies`
+  with language alternates.
+- **`app/robots.ts`** → `/robots.txt` allowing all crawlers and pointing to
+  the sitemap.
+- **`app/opengraph-image.tsx`** → dynamic 1200×630 OG/Twitter card generated
+  with `next/og` (no external asset needed).
+- **`app/manifest.ts`** → `/manifest.webmanifest` for PWA/add-to-home.
+- **Per-page metadata** on `/privacy` and `/cookies` with canonical + OG.
+
+### Configuring the site URL
+
+Set `NEXT_PUBLIC_SITE_URL` in `.env.local` (see `.env.example`). It is used for:
+
+- `metadataBase` — makes every relative Open Graph / Twitter / canonical URL
+  resolve correctly,
+- `sitemap.xml` entries,
+- `robots.txt` `Sitemap:` + `Host:` directives,
+- JSON-LD `@id`, `url` and `logo` fields.
+
+After deploying:
+
+1. Submit `https://<your-domain>/sitemap.xml` in Google Search Console.
+2. Validate the homepage and each legal page with
+   [Rich Results Test](https://search.google.com/test/rich-results) and
+   [Schema Markup Validator](https://validator.schema.org/).
+3. Preview the Open Graph card with
+   [opengraph.xyz](https://www.opengraph.xyz/).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

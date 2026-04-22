@@ -3,9 +3,31 @@ import { LegalDoc } from "../components/LegalDoc";
 import { CookieSettingsButton } from "../components/CookieSettingsButton";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Midnight Auto Studio",
+  title: "Cookie Policy",
   description:
     "Details of the cookies used on midnightautostudio.com and how to manage your consent.",
+  alternates: {
+    canonical: "/cookies",
+    languages: {
+      "x-default": "/cookies",
+      sl: "/cookies",
+      en: "/cookies",
+      de: "/cookies",
+    },
+  },
+  openGraph: {
+    type: "article",
+    url: "/cookies",
+    title: "Cookie Policy | Midnight Auto Studio",
+    description:
+      "Details of the cookies used on midnightautostudio.com and how to manage your consent.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cookie Policy | Midnight Auto Studio",
+    description:
+      "Details of the cookies used on midnightautostudio.com and how to manage your consent.",
+  },
   robots: { index: true, follow: true },
 };
 
