@@ -13,6 +13,9 @@ interface ProtectionDemoProps {
   title: string;
   subtitle: string;
   benefits: BenefitCard[];
+  beforeLabel: string;
+  afterLabel: string;
+  dragHint: string;
   beforeImage?: string;
   afterImage?: string;
 }
@@ -22,6 +25,9 @@ export function ProtectionDemo({
   title,
   subtitle,
   benefits,
+  beforeLabel,
+  afterLabel,
+  dragHint,
   beforeImage = "/before1.webp",
   afterImage = "/after1.webp",
 }: ProtectionDemoProps) {
@@ -127,7 +133,7 @@ export function ProtectionDemo({
             <div className="absolute inset-0">
               <Image
                 src={afterImage}
-                alt="Zaščiten lak"
+                alt={afterLabel}
                 fill
                 sizes="(min-width: 1024px) 1024px, 100vw"
                 className="object-cover pointer-events-none select-none"
@@ -146,7 +152,7 @@ export function ProtectionDemo({
               >
                 <Image
                   src={beforeImage}
-                  alt="Lak brez PPF"
+                  alt={beforeLabel}
                   fill
                   sizes="(min-width: 1024px) 1024px, 100vw"
                   className="object-cover pointer-events-none select-none"
@@ -158,11 +164,11 @@ export function ProtectionDemo({
             <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent" />
 
             <div className="absolute left-4 top-4 rounded-full border border-white/[0.14] bg-black/45 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.24em] text-white/80 backdrop-blur-sm md:left-5 md:top-5">
-              Brez PPF
+              {beforeLabel}
             </div>
 
             <div className="absolute right-4 top-4 rounded-full border border-white/[0.14] bg-black/45 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.24em] text-white/80 backdrop-blur-sm md:right-5 md:top-5">
-              Zaščiten lak
+              {afterLabel}
             </div>
 
             <div
@@ -187,7 +193,7 @@ export function ProtectionDemo({
           </div>
 
           <p className="mt-4 text-center text-[11px] tracking-[0.08em] text-white/50 md:text-xs">
-            Povleci za primerjavo zaščite
+            {dragHint}
           </p>
         </div>
 

@@ -221,6 +221,10 @@ const I18N: Record<Lang, Dict> = {
     privacyLabel: "Zasebnost",
     cookiesLabel: "Piškotki",
     cookieSettingsLabel: "Nastavitve piškotkov",
+    recommendedLabel: "Priporočeno",
+    demoBeforeLabel: "Brez PPF",
+    demoAfterLabel: "Zaščiten lak",
+    demoDragHint: "Povleci za primerjavo zaščite",
     galleryLabel: "GALERIJA",
     prev: "Nazaj",
     next: "Naprej",
@@ -390,6 +394,10 @@ const I18N: Record<Lang, Dict> = {
     privacyLabel: "Privacy",
     cookiesLabel: "Cookies",
     cookieSettingsLabel: "Cookie Settings",
+    recommendedLabel: "Recommended",
+    demoBeforeLabel: "Without PPF",
+    demoAfterLabel: "Protected paint",
+    demoDragHint: "Drag to compare protection",
     galleryLabel: "GALLERY",
     prev: "Prev",
     next: "Next",
@@ -558,6 +566,10 @@ const I18N: Record<Lang, Dict> = {
     privacyLabel: "Datenschutz",
     cookiesLabel: "Cookies",
     cookieSettingsLabel: "Cookie-Einstellungen",
+    recommendedLabel: "Empfohlen",
+    demoBeforeLabel: "Ohne PPF",
+    demoAfterLabel: "Geschützter Lack",
+    demoDragHint: "Zum Vergleichen des Schutzes ziehen",
     galleryLabel: "GALERIE",
     prev: "Zurück",
     next: "Weiter",
@@ -984,6 +996,9 @@ export default function Home() {
         kicker={t("demoKicker")}
         title={t("demoTitle")}
         subtitle={t("demoSub")}
+        beforeLabel={t("demoBeforeLabel")}
+        afterLabel={t("demoAfterLabel")}
+        dragHint={t("demoDragHint")}
         benefits={[
           {
             label: "IMPACT",
@@ -1028,6 +1043,7 @@ export default function Home() {
         kicker={t("pricingKicker")}
         title={t("investmentTitle")}
         subtitle={t("investmentSub")}
+        recommendedLabel={t("recommendedLabel")}
         packs={[
           {
             name: t("pack1"),

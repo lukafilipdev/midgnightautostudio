@@ -15,6 +15,7 @@ interface PricingSectionProps {
   title: string;
   subtitle: string;
   packs: [PricingPack, PricingPack, PricingPack];
+  recommendedLabel: string;
 }
 
 export function PricingSection({
@@ -22,6 +23,7 @@ export function PricingSection({
   title,
   subtitle,
   packs,
+  recommendedLabel,
 }: PricingSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -45,8 +47,10 @@ export function PricingSection({
     price: string,
     isHighlight: boolean
   ): React.ReactNode => {
-    if (price.startsWith("od ")) {
-      const amount = price.replace(/^od\s+/, "");
+    const prefixMatch = price.match(/^(od|from|ab)\s+/i);
+    if (prefixMatch) {
+      const prefix = prefixMatch[1];
+      const amount = price.slice(prefixMatch[0].length);
 
       return (
         <div className="mb-5 flex items-end justify-center gap-1">
@@ -55,7 +59,7 @@ export function PricingSection({
               isHighlight ? "text-black/55" : "text-white/50"
             }`}
           >
-            od
+            {prefix}
           </span>
           <span
             className={`text-[48px] font-light leading-none tracking-[-0.04em] md:text-[58px] ${
@@ -127,7 +131,7 @@ export function PricingSection({
                   <>
                     <div className="pointer-events-none absolute inset-0 -z-10 rounded-[30px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent_70%)] opacity-25 blur-xl" />
                     <div className="absolute left-1/2 top-6 -translate-x-1/2 text-[10px] uppercase tracking-[0.4em] text-black/40">
-                      Priporočeno
+                      {recommendedLabel}
                     </div>
                   </>
                 )}
