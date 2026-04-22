@@ -20,6 +20,32 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Google Analytics & cookie consent
+
+This site ships with a GDPR/ePrivacy-compliant cookie consent flow and Google
+Analytics 4 integration that is **opt-in only**.
+
+1. Copy `.env.example` to `.env.local`.
+2. Set `NEXT_PUBLIC_GA_ID` to your GA4 measurement ID (e.g. `G-XXXXXXXXXX`).
+3. Restart the dev server / rebuild.
+
+How it works:
+
+- `app/components/ConsentBootstrap.tsx` runs an inline script in `<head>` with
+  `strategy="beforeInteractive"`, sets Google Consent Mode v2 defaults to
+  `denied`, and replays any previously saved consent from `localStorage`.
+- `app/components/CookieConsent.tsx` is the banner + preferences modal.
+  It writes to `localStorage` under `mas_consent_v1` and dispatches a
+  `mas:consent-change` event. It listens for `mas:open-cookie-settings` so the
+  footer (or any other component) can re-open the dialog.
+- `app/components/Analytics.tsx` only injects `gtag.js` once the user has
+  granted analytics consent AND `NEXT_PUBLIC_GA_ID` is set. IP anonymisation
+  and advertising features are explicitly disabled.
+- Legal pages live at `/privacy` and `/cookies` with SL/EN/DE translations.
+
+If you later add marketing/ads scripts, gate them behind the `marketing` flag
+in the consent object (same pattern as `Analytics.tsx`).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -18,6 +18,11 @@ import { AssuranceSection } from "./components/AssuranceSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { BookingSection } from "./components/BookingSection";
 import { Footer } from "./components/Footer";
+import { CookieConsent } from "./components/CookieConsent";
+import { Analytics } from "./components/Analytics";
+import { useLocalStorageString } from "./components/useLocalStorage";
+
+const ALLOWED_LANGS = ["sl", "en", "de"] as const;
 
 const CONTACT = {
   email: "info@midnightautostudio.com",
@@ -213,6 +218,9 @@ const I18N: Record<Lang, Dict> = {
     qc3: "WhatsApp",
     qcSub: "Če želiš hiter odgovor, nas kontaktiraj direktno.",
     footer: "Midnight Auto Studio · Premium zaščita vozil",
+    privacyLabel: "Zasebnost",
+    cookiesLabel: "Piškotki",
+    cookieSettingsLabel: "Nastavitve piškotkov",
     galleryLabel: "GALERIJA",
     prev: "Nazaj",
     next: "Naprej",
@@ -379,6 +387,9 @@ const I18N: Record<Lang, Dict> = {
     qc3: "WhatsApp",
     qcSub: "For a faster response, contact us directly.",
     footer: "Midnight Auto Studio · Premium Automotive Protection",
+    privacyLabel: "Privacy",
+    cookiesLabel: "Cookies",
+    cookieSettingsLabel: "Cookie Settings",
     galleryLabel: "GALLERY",
     prev: "Prev",
     next: "Next",
@@ -544,6 +555,9 @@ const I18N: Record<Lang, Dict> = {
     qc3: "WhatsApp",
     qcSub: "Für eine schnellere Antwort kontaktieren Sie uns direkt.",
     footer: "Midnight Auto Studio · Premium Fahrzeugschutz",
+    privacyLabel: "Datenschutz",
+    cookiesLabel: "Cookies",
+    cookieSettingsLabel: "Cookie-Einstellungen",
     galleryLabel: "GALERIE",
     prev: "Zurück",
     next: "Weiter",
@@ -592,7 +606,11 @@ function useRevealOnScroll() {
 
 
 export default function Home() {
-  const [lang, setLang] = useState<Lang>("sl");
+  const [lang, setLang] = useLocalStorageString<Lang>(
+    "mas_lang",
+    ALLOWED_LANGS,
+    "sl",
+  );
   const [service, setService] = useState("");
   const [scrolled, setScrolled] = useState(false);
 
@@ -1260,7 +1278,15 @@ export default function Home() {
         contact={CONTACT}
       />
 
-      <Footer tagline={t("footer")} />
+      <Footer
+        tagline={t("footer")}
+        privacyLabel={t("privacyLabel")}
+        cookiesLabel={t("cookiesLabel")}
+        settingsLabel={t("cookieSettingsLabel")}
+      />
+
+      <CookieConsent lang={lang} />
+      <Analytics />
     </main>
   );
 }

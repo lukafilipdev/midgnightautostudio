@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { ConsentBootstrap } from "./components/ConsentBootstrap";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -20,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <ConsentBootstrap />
+      </head>
       <body
         className={montserrat.className}
         suppressHydrationWarning
