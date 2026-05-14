@@ -1,5 +1,6 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { useEffect, useRef, useState } from "react";
 
 export interface BookingContact {
@@ -59,6 +60,9 @@ export function BookingSection({
 }: BookingSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [vehicle, setVehicle] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,6 +81,27 @@ export function BookingSection({
 
     return () => observer.disconnect();
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+  
+    try {
+      await emailjs.send(
+        "service_smrzaok",
+        "template_vucn23j",
+        { vehicle, service, email },
+        "HFiMPHGdaebIw2OTz"
+      );
+      setStatus("sent");
+      setVehicle("");
+      setEmail("");
+      onServiceChange("");
+    } catch (err: any) {
+      console.error("EmailJS error:", JSON.stringify(err));
+      setStatus("error");
+    }
+  };
 
   return (
     <section
@@ -113,15 +138,19 @@ export function BookingSection({
             }`}
           >
             <div className="border-t border-white/[0.06] pt-8">
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
+                  value={vehicle}
+                  onChange={(e) => setVehicle(e.target.value)}
                   placeholder={vehiclePlaceholder}
+                  required
                   className="w-full border border-white/[0.08] bg-white/[0.02] px-5 py-4 text-sm text-white placeholder:text-white/28 outline-none transition-colors duration-300 focus:border-white/[0.18]"
                 />
 
                 <select
                   value={service}
                   onChange={(e) => onServiceChange(e.target.value)}
+                  required
                   className="w-full border border-white/[0.08] bg-white/[0.02] px-5 py-4 text-sm text-white outline-none transition-colors duration-300 focus:border-white/[0.18]"
                 >
                   <option value="" className="bg-black text-white">
@@ -136,20 +165,37 @@ export function BookingSection({
                 </select>
 
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
                   placeholder={emailPlaceholder}
+                  required
                   className="w-full border border-white/[0.08] bg-white/[0.02] px-5 py-4 text-sm text-white placeholder:text-white/28 outline-none transition-colors duration-300 focus:border-white/[0.18]"
                 />
 
                 <button
                   type="submit"
-                  className="w-full border border-white/[0.12] py-4 text-sm tracking-[0.18em] uppercase text-white transition-all duration-300 hover:bg-white hover:text-black"
+                  disabled={status === "sending"}
+                  className="w-full border border-white/[0.12] py-4 text-sm tracking-[0.18em] uppercase text-white transition-all duration-300 hover:bg-white hover:text-black disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  {submitLabel}
+                  {status === "sending" ? "POŠILJANJE..." : submitLabel}
                 </button>
               </form>
 
-              <p className="mt-4 text-xs text-white/38 leading-relaxed">
-                {responseNote}
+              <p className="mt-4 text-xs leading-relaxed">
+                {status === "sent" && (
+                  <span className="text-green-400/70">
+                    Zahteva poslana. Odgovorimo v 24–48h.
+                  </span>
+                )}
+                {status === "error" && (
+                  <span className="text-red-400/70">
+                    Napaka pri pošiljanju. Poskusite znova.
+                  </span>
+                )}
+                {(status === "idle" || status === "sending") && (
+                  <span className="text-white/38">{responseNote}</span>
+                )}
               </p>
             </div>
           </div>
