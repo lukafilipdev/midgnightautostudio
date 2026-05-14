@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Logo } from "./Logo";
 
 type Lang = "sl" | "en" | "de";
@@ -11,93 +12,148 @@ interface HeroProps {
   limitedText: string;
 }
 
-export function Hero({ lang, requestText, viewBuildsText, limitedText }: HeroProps) {
+export function Hero({
+  lang,
+  requestText,
+  viewBuildsText,
+  limitedText,
+}: HeroProps) {
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center px-6 pt-24 overflow-hidden bg-black">
+    <section className="relative min-h-[100svh] overflow-hidden bg-black px-6">
+      {/* Hero image */}
+      <div className="absolute inset-0 -translate-y-[14vh] md:translate-y-0 scale-[1.08] md:scale-100">
+        <Image
+          src="/hero/hero.webp"
+          alt="Midnight Auto Studio cars"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_90%] md:object-[center_72%] lg:object-[center_68%]"
+        />
+      </div>
 
-      {/* Atelier stage light — tighter ellipse kept to the upper half so it never spills into the bottom */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_35%,rgba(255,255,255,0.08),transparent_65%)]" />
+      {/* Top overlay */}
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/90 to-transparent" />
 
-      {/* Deep bottom blend — forces the last ~25% of Hero to pure #000 so it meets Why seamlessly */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[linear-gradient(to_bottom,transparent,#000_55%)]" />
+      {/* Softer bottom blend */}
+      <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-black via-black/55 to-transparent" />
 
-      {/* Subtle noise */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.025] hero-noise" />
+      {/* Very subtle dark layer */}
+      <div className="absolute inset-0 bg-black/5" />
 
-      <div className="relative z-20 max-w-4xl text-center">
-        
-        {/* Logo */}
-        <div className="flex justify-center mb-6 hero-animate-1 logo-glow">
-          <Logo className="h-64 md:h-80 lg:h-[420px] w-auto" />
-        </div>
+      {/* Noise */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.018] hero-noise" />
 
+      {/* Logo */}
+      <div className="absolute inset-x-0 top-[13vh] md:top-[16vh] lg:top-[12vh] z-20 flex justify-center logo-glow hero-animate-1">
+        <Logo className="h-28 sm:h-32 md:h-52 lg:h-56 w-auto" />
+      </div>
+
+      {/* Text */}
+      <div className="absolute left-1/2 bottom-0 md:bottom-4 z-20 w-full max-w-4xl -translate-x-1/2 px-6 text-center">
         {/* Headline */}
-        <div className="max-w-2xl mx-auto space-y-4 hero-animate-2">
-          <p className="text-white/90 text-lg md:text-xl lg:text-2xl font-light tracking-wide leading-relaxed">
-            {lang === "sl"
-              ? "Butični studio zaščite in preobrazbe za"
-              : lang === "de"
-                ? "Boutique-Studio für"
-                : "Boutique automotive protection atelier for"}
-            <span className="font-semibold gradient-text"> BMW M</span>,
-            <span className="font-semibold gradient-text"> Audi RS</span>{" "}
-            {lang === "sl" ? "in" : "&"}
-            <span className="font-semibold gradient-text"> Porsche</span>.
-          </p>
-        </div>
+        <p className="text-white/90 text-lg md:text-xl lg:text-2xl font-light tracking-wide leading-relaxed hero-animate-2">
+          {lang === "sl"
+            ? "Butični studio zaščite in preobrazbe za"
+            : lang === "de"
+            ? "Boutique-Studio für"
+            : "Boutique automotive protection atelier for"}
 
-        {/* Subheadline */}
-        <p className="mt-5 text-white/60 text-sm md:text-base max-w-xl mx-auto tracking-wide hero-animate-3">
+          <span className="font-semibold gradient-text"> BMW M</span>,
+          <span className="font-semibold gradient-text"> AUDI RS</span>{" "}
+          {lang === "sl" ? "in" : "&"}
+          <span className="font-semibold gradient-text"> PORSCHE</span>.
+        </p>
+
+        {/* Hidden on mobile */}
+        <p className="hidden md:block mt-5 text-white/60 text-sm md:text-base max-w-xl mx-auto tracking-wide hero-animate-3">
           {lang === "sl"
             ? "Vizualizacija pred montažo. Izvedba brez kompromisov."
             : lang === "de"
-              ? "Design-Vorschau vor der Montage. Präzision ohne Kompromisse."
-              : "Design preview before installation. Precision-only execution."}
+            ? "Design-Vorschau vor der Montage. Präzision ohne Kompromisse."
+            : "Design preview before installation. Precision-only execution."}
         </p>
 
         {/* CTA Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 hero-animate-4">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 hero-animate-4">
+          {/* Primary */}
           <a
             href="#booking"
-            className="btn-primary w-full sm:w-auto px-12 py-3.5 rounded-full text-xs tracking-[0.2em] font-semibold text-center bg-white text-black border-2 border-white"
+            className="group relative flex h-[54px] w-full sm:w-[330px] items-center justify-center rounded-full border-2 border-white bg-white pl-8 pr-14 text-black"
           >
-            {requestText}
+            <span className="text-[12.5px] font-bold tracking-[0.24em] uppercase">
+              {requestText}
+            </span>
+
+            <span className="absolute right-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-black/25 transition-transform duration-300 group-hover:translate-x-0.5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </span>
           </a>
+
+          {/* Secondary */}
           <a
             href="#projects"
-            className="btn-secondary w-full sm:w-auto px-12 py-3.5 rounded-full text-xs tracking-[0.2em] font-medium text-center text-white/80 border border-white/20 hover:border-white/40 hover:text-white"
+            className="group relative flex h-[54px] w-full sm:w-[330px] items-center justify-center rounded-full border-2 border-white/30 bg-black/20 pl-8 pr-14 text-white/90 backdrop-blur-sm transition-all duration-300 hover:border-white/50"
           >
-            {viewBuildsText}
+            <span className="text-[12.5px] font-bold tracking-[0.24em] uppercase">
+              {viewBuildsText}
+            </span>
+
+            <span className="absolute right-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/30 transition-transform duration-300 group-hover:translate-x-0.5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </span>
           </a>
         </div>
 
         {/* Divider */}
-        <div className="mt-12 flex items-center justify-center gap-4 hero-animate-5">
+        <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 hero-animate-5">
           <div className="w-16 h-px bg-gradient-to-r from-transparent to-white/30" />
-          <p className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-medium">
+
+          <p className="text-[10px] tracking-[0.4em] text-white/45 uppercase font-medium">
             {limitedText}
           </p>
+
           <div className="w-16 h-px bg-gradient-to-l from-transparent to-white/30" />
         </div>
 
         {/* Trust microcopy */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 hero-animate-5">
+        <div className="mt-4 md:mt-7 mb-6 md:mb-0 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 hero-animate-5">
           <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
-            <span className="text-white/70">✓</span> BMW M / Audi RS{" "}
-            {lang === "sl" ? "specialisti" : lang === "de" ? "Spezialisten" : "specialists"}
+            <span className="text-white/70">✓</span> BMW M / Porsche specialists
           </span>
 
           <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
-            <span className="text-white/70">✓</span> Premium{" "}
-            {lang === "sl" ? "materiali" : lang === "de" ? "Materialien" : "materials"}
+            <span className="text-white/70">✓</span> Premium materials
           </span>
 
           <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
-            <span className="text-white/70">✓</span>{" "}
-            {lang === "sl" ? "Brez kompromisov" : lang === "de" ? "Keine Kompromisse" : "No compromises"}
+            <span className="text-white/70">✓</span> No compromises
           </span>
         </div>
-
       </div>
     </section>
   );
