@@ -23,7 +23,7 @@ export function Hero({
       {/* Hero image */}
       <div className="absolute inset-0 -translate-y-[14vh] md:translate-y-0 scale-[1.08] md:scale-100">
         <Image
-          src="/hero.png"
+          src="/background.webp"
           alt="Midnight Auto Studio cars"
           fill
           priority
