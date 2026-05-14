@@ -21,7 +21,7 @@ export function Hero({
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-black px-4 md:px-6">
       {/* Hero image */}
-      <div className="absolute inset-0 -translate-y-[14vh] md:translate-y-0 scale-[1.08] md:scale-100">
+      <div className="absolute inset-0 -translate-y-[8vh] md:translate-y-0 scale-[1.08] md:scale-100">
         <Image
           src="/background.webp"
           alt="Midnight Auto Studio cars"
@@ -48,7 +48,7 @@ export function Hero({
       <div className="pointer-events-none absolute inset-0 opacity-[0.018] hero-noise" />
 
       {/* Logo */}
-      <div className="absolute inset-x-0 top-[10vh] md:top-[12vh] z-20 flex justify-center logo-glow hero-animate-1">
+      <div className="absolute inset-x-0 top-[14vh] md:top-[12vh] z-20 flex justify-center logo-glow hero-animate-1">
         <Logo className="h-24 sm:h-28 md:h-44 lg:h-56 w-auto" />
       </div>
 
