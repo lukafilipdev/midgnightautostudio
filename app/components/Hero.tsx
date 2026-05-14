@@ -23,7 +23,7 @@ export function Hero({
       {/* Hero image */}
       <div className="absolute inset-0 -translate-y-[14vh] md:translate-y-0 scale-[1.08] md:scale-100">
         <Image
-          src="/hero/hero.webp"
+          src="/hero.png"
           alt="Midnight Auto Studio cars"
           fill
           priority
@@ -35,8 +35,11 @@ export function Hero({
       {/* Top overlay */}
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/90 to-transparent" />
 
-      {/* Softer bottom blend */}
-      <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-black via-black/55 to-transparent" />
+      {/* Soft cinematic fade */}
+      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/90 via-black/55 to-transparent" />
+
+      {/* Pure black blend at bottom */}
+      <div className="absolute inset-x-0 bottom-0 h-[14%] bg-gradient-to-t from-black to-transparent" />
 
       {/* Very subtle dark layer */}
       <div className="absolute inset-0 bg-black/5" />
@@ -45,8 +48,8 @@ export function Hero({
       <div className="pointer-events-none absolute inset-0 opacity-[0.018] hero-noise" />
 
       {/* Logo */}
-      <div className="absolute inset-x-0 top-[13vh] md:top-[16vh] lg:top-[12vh] z-20 flex justify-center logo-glow hero-animate-1">
-        <Logo className="h-28 sm:h-32 md:h-52 lg:h-56 w-auto" />
+      <div className="absolute inset-x-0 top-[13vh] md:top-[12vh] z-20 flex justify-center logo-glow hero-animate-1">
+        <Logo className="h-28 sm:h-32 md:h-44 lg:h-56 w-auto" />
       </div>
 
       {/* Text */}

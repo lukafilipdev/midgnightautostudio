@@ -100,7 +100,7 @@ const I18N: Record<Lang, Dict> = {
     selectedKicker: "IZBOR",
     featuredTitle: "IZPOSTAVLJENI PROJEKTI",
     featuredSub:
-      "Realni projekti. Premium materiali. Čiste linije. Slike so trenutno primeri — kasneje zamenjaj s svojimi.",
+      "Realni projekti. Premium materiali. Čiste linije.",
     galleryKicker: "CINEMATIC",
     galleryTitle: "GALERIJA PROJEKTOV",
     gallerySub:
