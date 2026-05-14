@@ -23,7 +23,7 @@ export function Hero({
       {/* Hero image */}
       <div className="absolute inset-0 -translate-y-[14vh] md:translate-y-0 scale-[1.08] md:scale-100">
         <Image
-          src="/background.webp"
+          src="/hero.png"
           alt="Midnight Auto Studio cars"
           fill
           priority
@@ -136,7 +136,7 @@ export function Hero({
         <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 hero-animate-5">
           <div className="w-16 h-px bg-gradient-to-r from-transparent to-white/30" />
 
-          <p className="text-[10px] tracking-[0.4em] text-white/45 uppercase font-medium">
+          <p className="text-[8px] md:text-[10px] tracking-[0.35em] text-white/45 uppercase font-medium">
             {limitedText}
           </p>
 
@@ -145,15 +145,15 @@ export function Hero({
 
         {/* Trust microcopy */}
         <div className="mt-4 md:mt-7 mb-6 md:mb-0 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 hero-animate-5">
-          <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
+          <span className="text-[9px] md:text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
             <span className="text-white/70">✓</span> BMW M / Porsche specialists
           </span>
 
-          <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
+          <span className="text-[9px] md:text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
             <span className="text-white/70">✓</span> Premium materials
           </span>
 
-          <span className="text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
+          <span className="text-[9px] md:text-[11px] text-white/50 tracking-wide flex items-center gap-1.5">
             <span className="text-white/70">✓</span> No compromises
           </span>
         </div>
