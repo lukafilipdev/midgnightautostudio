@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 export interface BookingContact {
   email: string;
   instagram: string;
-  whatsapp: string;
+  phone: string;
 }
 
 interface BookingSectionProps {
@@ -240,9 +240,7 @@ export function BookingSection({
                 </a>
 
                 <a
-                  href={contact.whatsapp}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={contact.phone}
                   className="flex items-center justify-between gap-4 border-b border-white/[0.06] py-5 transition-colors duration-300 hover:text-white"
                 >
                   <span className="text-sm text-white/[0.78]">{qc3}</span>

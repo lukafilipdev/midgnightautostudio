@@ -25,9 +25,9 @@ import { useLocalStorageString } from "./components/useLocalStorage";
 const ALLOWED_LANGS = ["sl", "en", "de"] as const;
 
 const CONTACT = {
-  email: "info@midnightautostudio.com",
+  email: "info.midnightautostudio@gmail.com",
   instagram: "https://instagram.com/midnightautostudio.eu",
-  whatsapp: "https://wa.me/38640813855",
+  phone: "tel:+38640813855",
 };
 
 const HERO_VIDEO =
@@ -215,7 +215,7 @@ const I18N: Record<Lang, Dict> = {
     quickContact: "HITER KONTAKT",
     qc1: "Email",
     qc2: "Instagram",
-    qc3: "WhatsApp",
+    qc3: "Telefon",
     qcSub: "Če želiš hiter odgovor, nas kontaktiraj direktno.",
     footer: "Midnight Auto Studio · Premium zaščita vozil",
     privacyLabel: "Zasebnost",
@@ -388,7 +388,7 @@ const I18N: Record<Lang, Dict> = {
     quickContact: "QUICK CONTACT",
     qc1: "Email",
     qc2: "Instagram",
-    qc3: "WhatsApp",
+    qc3: "Phone",
     qcSub: "For a faster response, contact us directly.",
     footer: "Midnight Auto Studio · Premium Automotive Protection",
     privacyLabel: "Privacy",
@@ -560,7 +560,7 @@ const I18N: Record<Lang, Dict> = {
     quickContact: "SCHNELLER KONTAKT",
     qc1: "E-Mail",
     qc2: "Instagram",
-    qc3: "WhatsApp",
+    qc3: "Telefon",
     qcSub: "Für eine schnellere Antwort kontaktieren Sie uns direkt.",
     footer: "Midnight Auto Studio · Premium Fahrzeugschutz",
     privacyLabel: "Datenschutz",
@@ -666,7 +666,7 @@ export default function Home() {
     () => [
       { src: "/porscheproject.webp", label: "Porsche 911 · Full Body PPF", tag: "PPF" },
       { src: "/audiproject.webp", label: "AUDI SQ8 · Full Body Wrap", tag: "WRAP" },
-      { src: IMG.rs6, label: "Audi RS6 · Track Protection", tag: "TRACK" },
+      { src: "/e92.webp", label: "BMW E92 M3 · Cosmetic PPF", tag: "PPF" },
     ],
     []
   );
